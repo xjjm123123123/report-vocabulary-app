@@ -7,3 +7,79 @@
 @media(max-width:760px){.learning-steps{gap:15px;font-size:10px}.recognition-actions{gap:8px}.recognition-actions .rating{font-size:14px;padding:17px 5px}.recognition-actions small{font-size:9px}.review-plan{font-size:11px;line-height:1.8}}
 .pronunciation-block{margin:19px auto 0;display:flex;flex-direction:column;align-items:center;gap:10px}.pronunciation-row{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;max-width:100%;line-height:1.5}.accent-label{font-size:11px;color:#8b8299}.ipa{font:19px/1.6 'Charis SIL','Noto Sans','DejaVu Sans',Arial,sans-serif;color:#687280;overflow-wrap:anywhere}.pronunciation-button{display:inline-flex;align-items:center;gap:5px;border:1px solid #e1dce9;background:#f9f7fc;color:#77629f;border-radius:6px;padding:7px 10px;font-size:11px;min-height:34px;white-space:nowrap}.pronunciation-button:hover{background:#eee9f5}.pronunciation-button.slow{background:transparent;color:#8a8494}.pronunciation-button.is-playing{background:#7764b6;color:#fff;border-color:#7764b6}.pronunciation-button.is-loading{background:#eee9f5;color:#83729b}.pronunciation-note{font-size:10px;color:#97909f;margin:10px 0 0;line-height:1.7}
 @media(max-width:760px){.pronunciation-row{gap:8px}.ipa{font-size:17px}.pronunciation-button{padding:7px 8px;font-size:10px}.pronunciation-block{gap:12px}.accent-label{font-size:10px}}
+
+/* Report guide: content first, expandable detail and shared templates. */
+[hidden]{display:none!important}
+.writing-guide{margin-top:28px;color:var(--ink)}
+.guide-intro{background:#eee9df;border:1px solid #e5dfd3;border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.guide-intro h2{font-family:Georgia,'Songti SC',serif;font-size:26px;font-weight:550;line-height:1.5}
+.guide-intro p{max-width:760px}
+.guide-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:18px}
+.guide-actions a{text-decoration:none}
+.guide-section{background:white;border:1px solid var(--line);border-radius:10px;margin:13px 0;overflow:hidden}
+.guide-section summary{font-size:15px;font-weight:600;padding:20px 23px;cursor:pointer;color:#4d5662;line-height:1.6}
+.guide-section summary:hover{background:#f8f7fb}
+.guide-section[open]>summary{border-bottom:1px solid #ebe8e2}
+.guide-body{padding:22px 25px}
+.guide-body>p+p{margin-top:16px}
+.guide-body h3{margin:24px 0 10px;font-size:17px}
+.guide-body h3:first-child{margin-top:0}
+.guide-body strong{font-weight:600;color:#4e5663}
+.guide-lead{font-size:15px;line-height:1.9}
+.guide-steps{padding-left:22px;margin:18px 0;display:grid;gap:15px}
+.guide-steps li,.guide-checklist li{font-size:14px;color:#69727b;line-height:1.9;padding-left:4px}
+.guide-callout{border-left:3px solid #ab98cb;background:#f6f3fa;padding:15px 18px;font-size:13px;line-height:1.9;color:#686177;margin-top:18px;border-radius:0 6px 6px 0}
+.guide-table-wrap{max-width:100%;overflow-x:auto;margin:16px 0 20px;border:1px solid #e8e5ec;border-radius:7px}
+.guide-table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.8;text-align:left}
+.guide-table th{background:#f7f5fa;font-weight:600;color:#776887}
+.guide-table td,.guide-table th{padding:12px 15px;border-bottom:1px solid #ece9ed;vertical-align:top;min-width:90px;overflow-wrap:break-word}
+.guide-table tr:last-child td,.guide-table tr:last-child th{border-bottom:0}
+.guide-table [lang="en"]{font:15px/1.8 Georgia,serif;min-width:180px}
+.guide-memory{background:#f6f3fa;border-radius:8px;padding:18px 20px;color:#7a629e;font-size:17px;font-weight:600;line-height:1.8;letter-spacing:.3px;margin-bottom:18px}
+.guide-template-section{margin:30px 0;scroll-margin-top:20px}
+.guide-type-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.guide-type-tab{border:1px solid #e0dbe7;background:#faf9fc;color:#7f778b;border-radius:8px;padding:17px 12px;text-align:left;min-width:0}
+.guide-type-tab strong{display:block;font-size:15px;font-weight:600}
+.guide-type-tab span{display:block;font-size:11px;margin-top:6px;line-height:1.5}
+.guide-type-tab[aria-selected="true"]{border-color:#9d88c1;color:#68548e;background:#efe9f7;box-shadow:inset 0 -2px 0 #9d88c1}
+.guide-type-tab:focus-visible,.guide-section summary:focus-visible{outline:2px solid #8a70b6;outline-offset:3px}
+.guide-type-panel{background:white;border:1px solid var(--line);border-radius:11px;padding:28px 30px}
+.guide-type-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}
+.guide-type-heading h3{font-size:21px;margin-bottom:9px}
+.guide-type-heading .hint-tag{white-space:nowrap}
+.guide-stage{color:#8d7caa;background:#f7f5fa;padding:11px 15px;margin:18px 0;font:14px/1.8 Georgia,serif;overflow-wrap:anywhere;border-radius:6px}
+.guide-key-line{margin:20px 0 25px;padding:17px 20px;border-left:3px solid #b9a783;background:#faf7f1;border-radius:0 7px 7px 0}
+.guide-key-line>span{font-size:11px;color:#998368}
+.guide-key-line p{font:18px/1.8 Georgia,serif;color:#5e5668;margin:6px 0}
+.guide-key-line small{font-size:11px;color:#998a79}
+.guide-template-heading h4{font-size:15px;font-weight:600;margin:0;color:#58616c}
+.guide-template-heading .guide-actions{margin-top:13px}
+.guide-template-text{font:17px/1.95 Georgia,serif;white-space:pre-wrap;overflow-wrap:anywhere;margin:18px 0 11px;color:#535b66;background:#f8f7fb;padding:23px 25px;border-radius:7px}
+.guide-caption{font-size:12px;color:#919099;line-height:1.8}
+.guide-type-panel>.guide-section:first-of-type{margin-top:23px}
+.guide-type-panel .guide-section summary{font-size:14px;padding:16px 18px}
+.guide-type-panel .guide-body{padding:18px}
+.guide-example-paragraph{margin-top:22px;padding-top:20px;border-top:1px solid #eeeaf0}
+.guide-paragraph-role{display:block;font-size:12px;line-height:1.8;color:#9884ad;margin-bottom:10px}
+.guide-example-en{font:18px/1.9 Georgia,serif;color:#515a67}
+.guide-example-zh{font-size:13px;line-height:1.9;margin-top:11px;color:#889099}
+.guide-checklist{padding-left:22px;display:grid;gap:13px;margin:20px 0}
+.practice-section{margin-top:30px;scroll-margin-top:20px}
+.practice-label{display:block;font-size:12px;color:#8d849a;margin-top:22px}
+.practice-section .practice-area{margin-top:10px;min-height:280px}
+@media(max-width:760px){
+ .guide-intro{padding:23px 20px}.guide-intro h2{font-size:23px}
+ .guide-section summary{padding:17px 18px;font-size:14px}.guide-body{padding:19px 18px}
+ .guide-actions .button{font-size:12px;padding:10px 13px}
+ .guide-steps{padding-left:20px;gap:14px}.guide-steps li,.guide-checklist li{font-size:13px}
+ .guide-callout{padding:13px 14px;font-size:12px}
+ .guide-memory{font-size:15px;padding:15px 16px}
+ .guide-table{font-size:12px}.guide-table td,.guide-table th{padding:10px 12px;min-width:105px}.guide-table [lang="en"]{font-size:14px}
+ .guide-type-tabs{gap:6px}.guide-type-tab{padding:14px 9px}.guide-type-tab strong{font-size:13px}.guide-type-tab span{font-size:10px;overflow-wrap:normal}
+ .guide-type-panel{padding:21px 18px}.guide-type-heading{display:block}.guide-type-heading .hint-tag{display:inline-block;margin-top:13px}
+ .guide-key-line{padding:14px 16px}.guide-key-line p{font-size:17px}
+ .guide-template-text{padding:18px 16px;font-size:16px}
+ .guide-type-panel .guide-section summary{padding:14px;font-size:13px}.guide-type-panel .guide-body{padding:15px}
+ .guide-example-en{font-size:17px}.guide-example-zh{font-size:12px}
+ .practice-section .practice-area{font-size:16px}
+}

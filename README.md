@@ -6,7 +6,7 @@
 
 最方便的方式：双击 output 文件夹中的「写作词间_1000词.html」，使用 Chrome、Edge 或 Safari 打开。它是完整的单文件应用，不需要安装或联网。
 
-也可以双击本文件夹中的 index.html。该文件需要与 vocabulary.js、pronunciation.js、core.js、app.js、styles.css 保持在同一个文件夹内。
+也可以双击本文件夹中的 index.html。该文件需要与 vocabulary.js、pronunciation.js、core.js、writing-guide.js、writing-guide-ui.js、app.js、styles.css 保持在同一个文件夹内。
 
 ## 每日学习
 
@@ -58,3 +58,15 @@ IPA数据来源与许可证详见 pronunciation-sources.md 与 licenses/。
 - pronunciation-sources.md 和 licenses/：数据出处与许可证
 - core.js：每日计划与间隔复习规则
 - app.js：交互、拼写与记录管理
+
+## 报告模版与写作练习
+
+「写作练习」上方提供详细的中文使用指南，基于第三课报告写作资料整理：六步拆题、特征/类别/部分的判断、共用12句框架、三种扩展模版、逐句作用、填空示范、三篇150—200词范文及中文解释、词数增删方法和表达句库。
+
+切换题型不会改动草稿。可复制模版，或在练习区为空时直接放入；已有草稿时保留内容。指南可以下载为 Markdown 文档，离线单文件版也可下载。Word 版在 output/三种Report模版使用文档.docx。
+
+课程提出避免连续复制7词，因此资料强调背结构与短语、按题目重新组织表达，不将示范稿直接作为提交稿。考试字数和标注方式以实际题面为准。
+
+- writing-guide.js：详细写作指南、共用框架、模版和文档内容
+- writing-guide-ui.js：指南与模版界面
+- 三种Report模版使用文档.md：可单独阅读的详细文档

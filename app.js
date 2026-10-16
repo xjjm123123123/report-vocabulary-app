@@ -151,12 +151,31 @@
     <section class="settings-panel"><h2>复习安排</h2><p>先判断是否认识，再进行拼写检测。系统根据两项结果自动安排复习。</p><div class="schedule-list"><div><strong>首轮不会拼</strong>10分钟后再次出现</div><div><strong>刚学会或不确定</strong>首轮拼对，明天再巩固</div><div><strong>认识且拼对</strong>按1、3、7、14、30、60、120天递进</div><div><strong>分别记录</strong>认词判断与首轮拼写结果</div></div><div class="review-summary">后续日期的复习从北京时间凌晨4点开始到期。翻页浏览不会改变复习时间，重复当天评分不会连续升级。</div></section>
     <section class="settings-panel"><h2>学习记录备份</h2><p>记录保存在当前设备的当前浏览器中。清理浏览器数据、换设备或换浏览器后，请导入备份恢复。</p><div class="backup-actions"><button class="button secondary" data-action="export">导出学习备份</button><button class="button secondary" data-action="import">导入备份</button></div><input type="file" id="import-file" accept="application/json,.json" hidden><p style="margin-top:18px;font-size:11px">备份包含学习计划、每日记录和每个单词的复习时间。写作练习草稿单独保存在本机，不包含在词汇备份里。</p></section>
     <section class="settings-panel"><h2>发音与音标</h2><p>每个词提供英式、美式音标与发音按钮，可选择慢速跟读。音标中的 ˈ 标记主重音，ˌ 标记次重音。</p><p style="margin-top:12px">在线音频优先使用词典发音；设备英文语音可作为备用。多读音词结合当前词性朗读。拼写检测时隐藏音标并停止播放。</p></section><section class="settings-panel"><h2>怎么背更适合这门考试</h2><p>① 看英文，判断是否认识。<br>② 不认识的词先学释义和搭配。<br>③ 看中文，检测英文拼写。<br>④ 每天用3—5个新词写一个小段落。<br>⑤ 按提示复习，不把“学过”当成“掌握”。</p></section></div>`;}
-  const templates=[
-    {title:'描述型报告',english:'Descriptive report',intro:'回答：它是什么样的？先定义对象，再分方面描述特征。',text:'[Topic] is a type of [category] that [defining feature].\nOne important characteristic is [feature A].\nThis involves [explanation]. For example, [example].\nAnother characteristic is [feature B], which [function or effect].\nTogether, these characteristics [overall purpose].'},
-    {title:'分类型报告',english:'Classifying report',intro:'回答：按什么标准，分成哪些类？同一层级保持分类标准一致。',text:'Based on [criterion], [topic] falls into [A] and [B].\nThe first category, [A], is characterized by [features].\nThis category includes [subtypes, if needed].\nThe second category, [B], [characteristics].'},
-    {title:'组成型报告',english:'Compositional report',intro:'回答：整体由哪些部分构成，各自有什么作用？',text:'[Topic] is a [general category] that [purpose].\nIt consists of [A], [B], and [C].\n[A] is responsible for [function].\n[B] performs [function], while [C] [function].\nTogether, these components [overall function].'}
-  ];
-  function renderWriting(){let draft='';try{draft=localStorage.getItem(DRAFT)||'';}catch{}main.innerHTML=top('把词汇，变成你的报告。','沿用老师的三种报告结构。先选类型，再安排每句话的作用。')+`<div class="templates">${templates.map(t=>`<article class="template"><h3>${t.title} <span class="hint-tag">${t.english}</span></h3><p>${t.intro}</p><pre>${esc(t.text)}</pre></article>`).join('')}</div><section class="template" style="margin-top:25px"><h3>今天的小练习</h3><p>任选一个主题：Research Mindset / An Ideal University / An Ideal Project Group。尝试使用3—5个新词，正式模拟时控制在150—200词。</p><textarea class="practice-area" id="writing-draft" aria-label="英文写作练习" placeholder="Write your report here…">${esc(draft)}</textarea><div class="word-counter" id="word-counter">${countWords(draft)} 词 · 自动保存至本机</div><button class="text-button" data-action="download-draft">下载练习文字</button></section><p class="footnote">检查3C：Clear 表达具体，Concise 删除空话，Coherent 信息顺畅承接。定义和一般特征常用一般现在时。</p>`;}
+  const writingGuide = window.REPORT_WRITING_GUIDE;
+  function renderWriting(){
+    let draft='';try{draft=localStorage.getItem(DRAFT)||'';}catch{}
+    main.innerHTML=top('把词汇，变成你的报告。','先看拆题逻辑与共用模版，再动笔练习。')+
+      window.ReportWritingUI.render(writingGuide)+`<section class="template practice-section" id="report-practice"><h2>写作练习</h2><p>任选一个主题：Research Mindset / An Ideal University / An Ideal Project Group。先列 A、B、C，再展开解释与例子。课程练习为20分钟、150—200词，正式考试以题面为准。</p><label class="practice-label" for="writing-draft">你的英文报告</label><textarea class="practice-area" id="writing-draft" aria-label="英文写作练习" placeholder="先确定题型，列出三个点，再写你的报告…">${esc(draft)}</textarea><div class="word-counter" id="word-counter">${countWords(draft)} 词 · 自动保存至本机</div><button class="text-button" data-action="download-draft">下载练习文字</button></section><p class="footnote">检查3C：Clear 表达具体，Concise 删除空话，Coherent 信息顺畅承接。定义和一般特征常用一般现在时。</p>`;
+  }
+  function selectReportType(id){
+    if(!writingGuide?.templates.some(t=>t.id===id))return;
+    document.querySelectorAll('.guide-type-tab').forEach(b=>{const selected=b.dataset.template===id;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});
+    document.querySelectorAll('.guide-type-panel').forEach(p=>p.hidden=p.id!=='guide-panel-'+id);
+  }
+  async function copyReportTemplate(id){
+    const t=writingGuide?.templates.find(t=>t.id===id);if(!t)return;
+    try{await navigator.clipboard.writeText(t.text);toast('模版已复制，粘贴后替换方括号内容');}
+    catch{
+      const active=document.activeElement,area=document.createElement('textarea');area.value=t.text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.focus();area.select();
+      let copied=false;try{copied=document.execCommand('copy');}catch{}area.remove();active?.focus();
+      if(copied)toast('模版已复制，粘贴后替换方括号内容');else{download(t.english+'_模版.txt',t.text,'text/plain;charset=utf-8');toast('浏览器未能复制，已下载模版文字');}
+    }
+  }
+  function useReportTemplate(id){
+    const t=writingGuide?.templates.find(t=>t.id===id),area=document.getElementById('writing-draft');if(!t||!area)return;
+    if(area.value.trim()){toast('练习区已有草稿，请先下载保存；也可以复制模版自行粘贴。');return;}
+    area.value=t.text;area.dispatchEvent(new Event('input',{bubbles:true}));document.getElementById('report-practice').scrollIntoView({behavior:'smooth',block:'start'});area.focus({preventScroll:true});toast('模版已放入练习区，请替换方括号内容');
+  }
   function countWords(text){return(text.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)||[]).length;}
   function download(name,content,type='application/json'){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function exportBackup(){download(`写作词间_学习备份_${C.dayKey()}.json`,JSON.stringify(state,null,2));toast('已导出学习备份');}
@@ -215,6 +234,8 @@
       'exit-session':()=>navigate('today'),'close-detail':()=>{detail=null;render();},
       'prev-page':()=>{filter.page--;renderLibrary();},'next-page':()=>{filter.page++;renderLibrary();window.scrollTo({top:0});},
       export:exportBackup,import:()=>document.getElementById('import-file').click(),speak:()=>speak(b.dataset.id,b.dataset.accent,b.dataset.speed==='slow',b),
+      'select-report-type':()=>selectReportType(b.dataset.template),'copy-report-template':()=>copyReportTemplate(b.dataset.template),'use-report-template':()=>useReportTemplate(b.dataset.template),
+      'download-writing-guide':()=>download('三种Report模版使用文档.md',writingGuide.documentMarkdown,'text/markdown;charset=utf-8'),
       'download-draft':()=>download(`Report练习_${C.dayKey()}.txt`,document.getElementById('writing-draft').value,'text/plain;charset=utf-8')
     };actions[b.dataset.action]?.();
   });
@@ -243,6 +264,12 @@
   document.getElementById('confirm-import').onclick=()=>{if(pendingImport){persist(pendingImport);pendingImport=null;document.getElementById('confirm-dialog').close();navigate('today');toast('备份已导入');}};
   document.getElementById('confirm-dialog').addEventListener('cancel',()=>{pendingImport=null;});
   document.addEventListener('keydown',event=>{
+    const tab=event.target.closest('.guide-type-tab');
+    if(tab&&['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+      event.preventDefault();const tabs=[...document.querySelectorAll('.guide-type-tab')],index=tabs.indexOf(tab);
+      const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+      selectReportType(tabs[next].dataset.template);tabs[next].focus();return;
+    }
     if(!session||session.index>=session.ids.length||event.ctrlKey||event.metaKey||event.altKey)return;
     const editing=['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement?.tagName);
     if(editing)return;
