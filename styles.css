@@ -83,3 +83,17 @@
  .guide-example-en{font-size:17px}.guide-example-zh{font-size:12px}
  .practice-section .practice-area{font-size:16px}
 }
+
+.grammar-overview>summary{color:#77618c;background:#f5f1f9}
+.grammar-overview>.guide-body>.guide-actions{margin:0 0 20px}
+.grammar-overview>.guide-body>.guide-section{margin-top:20px}
+.grammar-rule summary{font-size:14px}
+.grammar-kind{display:inline-block;font-size:10px;font-weight:400;background:#eee9f4;color:#8b76a6;border-radius:4px;padding:3px 6px;margin-left:7px;white-space:nowrap}
+.grammar-source{font-size:11px!important;color:#99909f!important;margin-top:17px!important;line-height:1.8}
+.grammar-example{padding:15px 18px;margin:18px 0;border-radius:7px;overflow-wrap:anywhere}
+.grammar-example>strong{font-size:12px}
+.grammar-example>p{font:17px/1.9 Georgia,serif;color:#575d69;margin-top:7px}
+.grammar-example.needs-fix{background:#faf0ed;border-left:3px solid #c89e92}
+.grammar-example.corrected{background:#eef5ef;border-left:3px solid #91ab95}
+.grammar-guide .guide-section .guide-section .guide-body{padding:20px}
+@media(max-width:760px){.grammar-rule summary{font-size:13px;padding:16px!important}.grammar-kind{margin:7px 0 0;font-size:10px}.grammar-example{padding:13px 14px}.grammar-example>p{font-size:16px}.grammar-guide .guide-section .guide-section .guide-body{padding:16px}.grammar-source{font-size:10px!important}}

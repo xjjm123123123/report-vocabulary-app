@@ -236,6 +236,7 @@
       export:exportBackup,import:()=>document.getElementById('import-file').click(),speak:()=>speak(b.dataset.id,b.dataset.accent,b.dataset.speed==='slow',b),
       'select-report-type':()=>selectReportType(b.dataset.template),'copy-report-template':()=>copyReportTemplate(b.dataset.template),'use-report-template':()=>useReportTemplate(b.dataset.template),
       'download-writing-guide':()=>download('三种Report模版使用文档.md',writingGuide.documentMarkdown,'text/markdown;charset=utf-8'),
+      'download-grammar-guide':()=>download('前三课写作语法要点与雷点.md',writingGuide.grammar.documentMarkdown,'text/markdown;charset=utf-8'),
       'download-draft':()=>download(`Report练习_${C.dayKey()}.txt`,document.getElementById('writing-draft').value,'text/plain;charset=utf-8')
     };actions[b.dataset.action]?.();
   });

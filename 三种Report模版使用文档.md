@@ -472,4 +472,377 @@ there be 的具体替换： There are three components in the team → The team 
 
 
 
+## 附录：前三课写作语法要点与雷点
+
+
+
+按老师前三节课的知识整理。这里区分语法错误、文体偏好、结构与学术规范；错例用于教学，细节例句为复习补充，并非 PPT 逐字原文。
+
+## 资料来源
+
+| 课次 | 文件 | 页码 | 重点 |
+| --- | --- | --- | --- |
+| 第一课 | lesson1/lesson 1_ canvas.pdf | 第4、6—8页 | 学术诚信、引用、读者与写作目的；本课不是语法专项。 |
+| 第二课 | lesson2/lesson 2_canvas.pdf | 第2、4—17、19页 | 3C、信息流、正式与客观表达、语法与格式校对。 |
+| 第三课 | Report_canvas.pdf | 第3—7、9—10页 | 三种 report 的结构、语言特点及作业要求。 |
+
+
+
+## 一、前三课怎样连起来用
+
+### 第一课：先决定写给谁、为何写
+
+读者了解较少时，需要定义与解释；读者了解较多时，需要展示知识、理解与批判性思考。report 通常介绍一类对象及其特征、类别或组成，不能只靠“我喜欢”“你应该”来展开。课程邮件作业面向同学，语气与 report 不完全相同。
+
+依据：第一课第8页；lesson 1_tasks.docx 的 audience and purpose 练习
+
+### 第二课：用3C检查句子与段落
+
+Clear：谁做什么、具体指什么；Concise：删除重复，使用准确动词；Coherent：从旧信息引出新信息，从一般走向具体。连接词必须表达实际关系，不能把 First / Furthermore 当成逻辑本身。
+
+依据：第二课第4—13页
+
+### 第三课：先定义，再按题型组织信息
+
+描述型：大类定义→特征；分类型：分类标准→类别与子类；组成型：整体→部分、活动与功能。一般定义常用一般现在时，优先采用陈述句与准确的学科词汇。
+
+依据：第三课第3—7页
+
+## 二、16项语法检查点
+
+### 1. 时态与主谓一致：先找主语，再找限定动词（语法错误）
+
+写定义与常见特征通常用一般现在时；单数第三人称动词加 -s，复数主语用原形。具体过去事件按实际时间用过去时。
+
+**需要改：** An ideal university provide students with reliable resources.
+
+**改成：** An ideal university provides students with reliable resources.
+
+**为什么：** 主语 university 是单数，所以 provides。The quality of the resources is important 中，主语中心词是 quality，不能被 resources 带偏。
+
+**记法：** 写完圈出每句的主语与限定动词。A university provides… / Universities provide…；不要全篇无理由切换 was / is / will。
+
+依据：第二课第19页 Verb errors；第三课第7页 present tense
+
+### 2. 一句需要完整谓语：不要乱加 be（语法错误）
+
+be 接名词、形容词或构成被动／进行时；普通主动动词不直接放在 is 后。-ing 短语本身通常不是完整谓语。
+
+**需要改：** A research mindset is helps students. / A team consisting of three units.
+
+**改成：** A research mindset helps students. / A team consists of three units.
+
+**为什么：** is helps 不能组合成谓语；consisting of… 只修饰 team，句子还没说完整。A team consisting of three units completes the project 则有谓语 completes。
+
+**记法：** 关系句：X is a Y；动作句：X supports Y；被动句：X is supported by Y。先辨认句子在“定义”还是“做动作”。
+
+依据：第二课第19页 wrong form / fragments；第三课第7页 relational clauses
+
+### 3. 人称与指代：始终让读者知道谁是谁（语法／连贯）
+
+同一段不要在 students / you / we 之间无依据切换；This / it / they 要有明确指代。单数 they 可以使用，关键是全文一致、指向清楚。
+
+**需要改：** Students examine evidence. You then compare findings, and we draw conclusions.
+
+**改成：** Students examine evidence, compare findings, and draw conclusions.
+
+**为什么：** 主语从 students 变成 you 再变成 we，读者不知道是否还是同一群人。词类、数和代词形式也要检查。
+
+**记法：** Research encourages discussion. This is important. 可具体写成 This discussion helps students examine alternative explanations；别让 This 只指一个模糊的“大道理”。
+
+依据：第二课第4页 viewpoint；第11、15、19页 pronouns
+
+### 4. 定语从句：which / that 后也要有谓语（语法错误）
+
+定义句 that… 常用来限定对象；逗号后的 which… 常补充说明。which / that 在从句里作主语时不要再重复 it。
+
+**需要改：** Curiosity is a quality which it encourages inquiry.
+
+**改成：** Curiosity is a quality that encourages inquiry. / Curiosity, which encourages inquiry, supports research.
+
+**为什么：** which it 重复了主语。非限制性从句用逗号分开，不能用 that 替代这里的 which。
+
+**记法：** 模版中的 which [specific description] 要填 encourages inquiry 这样的谓语结构，不能只填 important。which 的先行词必须清楚。
+
+依据：第二课第12页 relative clause；第三课第7页 relational clauses；从句细节为复习补充
+
+### 5. 并列：词形一致，逻辑层级也一致（语法／结构）
+
+and / or 连接的项目尽量保持同样语法形式；A、B、C 同时还要是同一层级的特征、类别或组成部分。
+
+**需要改：** This involves checking sources, to compare findings, and careful conclusions.
+
+**改成：** This involves checking sources, comparing findings, and drawing careful conclusions.
+
+**为什么：** 三个并列项统一为动名词短语。语法平行不等于分类正确：large universities / public universities / excellent universities 混用了规模、性质和质量。
+
+**记法：** 特征可用 curiosity / critical thinking / persistence；组成可用 coordination / research / review。语法和内容都过一遍。
+
+依据：第二课第9页 linking verb phrases；第19页 lack of parallelism
+
+### 6. 动词与介词后面怎么接：背整个搭配（语法错误）
+
+involve / include 后接名词或 -ing；be responsible for 后接名词或 -ing；enable 后用 somebody to do；help somebody do / to do 均可。
+
+**需要改：** This involves to evaluate evidence. / The unit is responsible for collect data.
+
+**改成：** This involves evaluating evidence. / The unit is responsible for collecting data.
+
+**为什么：** 这里 for 是介词，后面的动词改成 -ing；involves 不能接 to evaluate。encourages researchers to ask questions 则是另一个搭配。
+
+**记法：** 背块：involves checking / responsible for collecting / enables students to evaluate / contributes to learning。to 有时是介词，不总表示动词不定式。
+
+依据：第二课第19页 faulty idioms / verb forms；第三课模版应用补充
+
+### 7. 分类与组成句式：主动、被动别混（语法错误）
+
+整体 consists of 部分；整体 comprises 部分；整体 is composed of 部分。类别可用 are classified into / fall into，并说明标准。
+
+**需要改：** The team is consisted of three units. / The team comprises of three units.
+
+**改成：** The team consists of three units. / The team comprises three units. / The team is composed of three units.
+
+**为什么：** consist of 在这个意义下不用被动；comprise 直接接宾语。为了考试好记，优先用 consists of 或 is composed of。
+
+**记法：** Based on the delivery channel, teaching formats fall into three categories. 分类句不能只列出几样东西，却不交代它们是什么关系。
+
+依据：第三课第5—6页；第二课第19页 faulty idioms
+
+### 8. 逗号不能单独连接两个完整句（语法错误）
+
+两个独立分句用句号、分号，或逗号加 and / but 等连词；从句和短语不能冒充完整句。
+
+**需要改：** The library provides resources, students use them for research. / For example, reliable sources.
+
+**改成：** The library provides resources. Students use these resources for research. / For example, students compare two reliable sources.
+
+**为什么：** 第一句是 comma splice；第二个 For example 后面只有名词短语。改后每个句子都有完整主谓。
+
+**记法：** 也可写：The library provides resources; students use them for research. 分号两边要能独立成句。150—200词短文用几个清楚短句完全可以。
+
+依据：第二课第12、19页 semicolon / run-ons / comma-splices / fragments
+
+### 9. 修饰语贴近被修饰词，句首动作要找对执行者（语法／清晰度）
+
+修饰语位置会改变意思。句首分词或 By + -ing 的动作执行者应与主句主语一致；To 表目的时也要检查是谁要做这个动作。被动句有时能由隐含施事说明目的，本课练习更推荐把执行者写清楚。
+
+**需要改：** To evaluate the method, three groups were created.
+
+**改成：** To evaluate the method, researchers created three groups.
+
+**为什么：** 按第二课练习的改法，写出 researchers，让 evaluate 的执行者直接可见。目的不定式加被动句并非一律错误；关键是目的及执行者是否清楚，不能把所有 to 开头的被动句都判错。
+
+**记法：** By comparing sources, students assess the claim. 成立；By comparing sources, the claim becomes reliable. 执行者错位。冻结的是田地时写 a farmer’s frozen field，而不是 a frozen farmer’s field。
+
+依据：第二课第5—6、19页 word order / misplaced modifiers；lesson 2_tasks.docx 第14—15、18题
+
+### 10. reason / because 与主语搭配：别把两套结构拼起来（结构／清晰度）
+
+同一个因果信息选择一套清楚结构：X happens because…，或 The reason… is that…；动作执行者和动作要合逻辑。
+
+**需要改：** The reason the team succeeds is because members communicate clearly.
+
+**改成：** The team succeeds because members communicate clearly. / The reason the team succeeds is that members communicate clearly.
+
+**为什么：** 按课程练习，删除重复的因果框架；这种原句在实际英语中能见到，课程更重视清楚简洁。另如 The planned project will run three experiments 可明确为 The researchers will conduct three experiments。
+
+**记法：** Financial aid is a growing problem 太模糊：资金不足可写 Insufficient financial aid creates difficulties for students；若问题是别的，就明确那个问题，不要自动补成 no financial aid。
+
+依据：第二课第5页 mixed constructions / faulty prediction；lesson 2_tasks.docx 第3、16—17题
+
+### 11. 比较同类对象，不拿特征与人或整体比较（语法错误）
+
+比较句的两边应是同类事物；需要时用 that / those 避免重复。
+
+**需要改：** The quality of this report is higher than the other group.
+
+**改成：** The quality of this report is higher than that of the other group’s report.
+
+**为什么：** quality 应与另一份报告的 quality 比，不能和 group 比。
+
+**记法：** 更易写的版本：This report is clearer than the other group’s report. 只比较有依据的方面，不为了高级句式堆复杂名词。
+
+依据：第二课第19页 faulty comparison；细节为复习补充
+
+### 12. 冠词、可数性与单复数：定义句最容易露错（语法错误）
+
+单数可数名词通常需要限定词；a / an 看发音。research / evidence / information 通常不可数；可数表达用 studies / pieces of evidence / sources。
+
+**需要改：** An ideal university is institution. / Researchers collect many informations and evidences.
+
+**改成：** An ideal university is an educational institution. / Researchers collect information and evidence.
+
+**为什么：** institution 是单数可数名词；information 和通常意义的 evidence 不能随意加 -s。a university 用 a，因为开头是 /j/；an ideal university 因 ideal 开头是元音。
+
+**记法：** 定义框架 X is a / an [category]。泛指一类也可用 Universities are educational institutions，但不要写 Universities are an institution。
+
+依据：第二课第19页 plural-singular inconsistency；冠词和可数性例子为复习补充
+
+### 13. 形容词修饰名词，副词修饰动作；位置服从意思（语法错误／表达）
+
+careful analysis 是名词短语；analyze carefully 是动词结构。副词经常放主语后或 be 后，但位置不是死规则。
+
+**需要改：** Students analyze the data careful.
+
+**改成：** Students analyze the data carefully. / Students conduct a careful analysis of the data.
+
+**为什么：** careful 不能这样修饰 analyze；换成副词 carefully，或让形容词修饰名词 analysis。
+
+**记法：** Students often compare sources. / The evidence is usually reliable. 课件要求避免副词位置带来笨拙或歧义，并未一律禁止句首副词或 split infinitive。
+
+依据：第二课第17、19页 adverb position / adj. & adv. errors
+
+### 14. 主动与被动：让重点清楚，别为“学术”强行被动（清晰度／语法）
+
+主动句清楚显示谁做什么；被动句适合突出分类对象或处理结果。两种语态都可用，选择取决于当前信息重点。
+
+**需要改：** The evaluation of sources is made by students.
+
+**改成：** Students evaluate sources. / Teaching formats are classified into three categories according to their delivery channel.
+
+**为什么：** 第一句可简化为具体主语与动词；第二句被动突出“教学形式如何分类”，恰好服务分类任务。原句的问题是笨重，不是被动语法一律错误。
+
+**记法：** The grandmother found three family members bound and gagged 明确祖母是发现者；原句 found…by the grandmother 容易让人误读谁捆绑了他们。
+
+依据：第二课第6页 short and concrete subjects；lesson 2_tasks.docx 第8、14题；第三课第5—7页
+
+### 15. 间接疑问句：用陈述语序（语法错误／文体）
+
+报告中可把直接问题改成 The report examines why… / It remains unclear how…，嵌入从句不倒装。
+
+**需要改：** The report explains why does the method work.
+
+**改成：** The report explains why the method works.
+
+**为什么：** why 从句里的主语 method 在谓语 works 前；去掉倒装助动词 does。
+
+**记法：** 直接问题 Why does the method work? 本身正确；在 report 正文中，间接疑问表达通常更适合说明任务。名词从句功能不同于定语从句。
+
+依据：第二课第17页 indirect questions；语序细节为复习补充
+
+### 16. 动词具体与名词化：按句子功能取舍（文体选择）
+
+写“谁做什么”时用准确动词；给概念命名、概括旧信息或衔接时可用名词化。不是把所有动词改成名词，也不是全部删掉名词化。
+
+**需要改：** Students carry out the implementation of the evaluation of the reliability of sources.
+
+**改成：** Students evaluate the reliability of sources. This evaluation guides the selection of evidence.
+
+**为什么：** 第一句把动作压进多个名词，增加阅读负担；改后 evaluate 承载动作，下一句 evaluation 合理承接旧信息。
+
+**记法：** 名词化：evaluation of evidence / analysis of data / allocation of tasks 可作名词块。扩展名词组：a collaborative team with clear responsibilities。这些结构能装入具体信息，但不要叠太多修饰语；句子仍应清楚交代主体与动作。
+
+依据：第二课第4、6、14页 stronger verbs / key actions in verbs / nominal style；第三课第7页 nominalization
+
+## 三、7项文体雷点
+
+### 空泛形容词与弱动词：不是 good 换成 excellent 就完成了
+
+描述具体动作与作用。The university is very good and really useful. → The university provides accessible research resources and constructive feedback. get / do / make 并非每次都错；查是否有更准确的 investigate / evaluate / obtain / allocate。
+
+依据：第二课第4—6、15页；第三课任务 Warming up exercise
+
+### 正式措辞与缩略形式：偏好不是机械替换
+
+报告一般写 cannot / does not / it is；避免 lots of / pretty good / etc. 造成模糊。look into → investigate；find out → determine，需看原意。no 比 not any 更简洁、little 比 not much 更紧凑，但不能为了缩短改变信息。
+
+依据：第二课第15—17页
+
+### there be：可以用，但连续使用会空、慢、重复
+
+There are three components in the team. 语法正确；The team consists of three components. 更直接表达组成。There are many useful things in a university. 要明确为 The university provides laboratories, library resources, and guidance services. 不要把所有存在关系强行改成“拥有”或“造成”。
+
+依据：第二课第4—6页 deadwood / clear subjects；lesson 2_tasks.docx 第11题与 Part two Task five
+
+### I / we / you：看目的，避免主观断言和视角跳转
+
+PPT 明确说 I / we 可以出现在学术写作中，不能总结成禁用第一人称。方法部分 We analyzed… 可清楚交代执行者；简短 report 描述一般对象时，通常直接用对象作主语。I think it is perfect 既主观又不具体；you should… 往往把说明写成建议。
+
+依据：第一课第8页；第二课第15页
+
+### 情态动词、客观性与证据强度
+
+这次 report 优先用陈述式定义与常见特征，少写 should / must / can 的号召式句子。若涉及不确定研究结果，仍应准确限定：The findings suggest an association in this sample. 不要把 may contribute 改成 guarantees，仅为避开情态动词而夸大证据。
+
+依据：第二课第2、14页；第三课第7页（原文 model verbs，应为 modal verbs）
+
+### 旧→新、一般→具体：少换同义词，多接住上句话
+
+An ideal university supports inquiry. This inquiry involves evaluating evidence. Such evaluation helps students compare explanations. 前句的新信息成为后句的起点。however 表转折、therefore 表因果、for example 表例证；没有因果就不要硬写 therefore。重复关键词可以建立连贯，不必每次都换高级同义词。
+
+依据：第二课第7—13页；lesson 2_tasks.docx caffeine 段落
+
+### 不要堆长句，也别用标题代替内容
+
+每句先确认主干；较长括号、多个 which 和连续的 -ing 从句可拆开。分类先给标准，组成解释部件功能，描述给可观察表现。写三次 This is important 不算完成三点展开。
+
+依据：第二课第5—6、19页；第三课第3—6页
+
+## 四、来源、改写与格式
+
+### 来源、引用与改写
+
+第一课包括逐字抄袭、改写／概括未标来源、拼接式抄袭、自我抄袭。不是只换同义词就算独立表达。读懂材料、重组内容，用要求的格式标明他人观点或事实来源。第三课作业特别写明连续复制7词被视为抄袭；背模版的功能与短语，提交表达应符合课程要求。
+
+依据：第一课第4、6—7页；第三课第10页
+
+### 说明性例子不是调查数据
+
+例如 For example, students compare two sources. 可以作为行为说明；不要编“研究证明95%的学生提高了成绩”、作者、论文或年份。引用真实材料就保留其范围和限制，未给数据就不要装成有数据。
+
+依据：第一课第4页 fabrication / falsification
+
+### 格式也是校对的一部分
+
+检查句首大写、英语标点、句后空格、段落一致性、标题与正文格式、引用。课堂练习是20分钟、150—200词，并要求类型／阶段／句子作用标注；考试是否沿用这些要求，以实际题面为准。
+
+依据：第二课第19页 mechanics；第三课第9—10页
+
+## 五、综合改写：An Ideal University
+
+**原段落：**
+
+An ideal university is institution which it provide many useful things. There are good teachers, you can get a lot of knowledges. To improve learning, useful feedback is provided. The reason it is important is because students can do the evaluation of informations.
+
+**修改后：**
+
+An ideal university is an educational institution that provides high-quality teaching and accessible resources. Teachers explain difficult concepts and offer constructive feedback. This feedback helps students identify weaknesses in their reasoning. Students then evaluate evidence and revise their arguments. These activities support clear thinking and independent learning.
+
+- institution 加 an educational；provide 改 provides；which it 改 that。
+
+- 去掉空泛 many useful things，写明教学与资源；拆掉逗号拼句。
+
+- 统一主语与视角；knowledge / information 通常不可数。
+
+- 明确教师提供反馈；This feedback 承接前句，把旧信息引到新信息。
+
+- 用 evaluate 代替 do the evaluation；删除重复的 reason…because 框架。
+
+- 这只是一个说明段，不是完整150—200词报告；完整成稿仍需按特征逐点展开。
+
+## 六、交卷前的10项检查
+
+1. 题型对不对：A、B、C 是特征、类别，还是组成部分？分类标准有没有写？
+
+2. 每句有没有完整主语和谓语？有没有 is helps、缺谓语或逗号拼句？
+
+3. 主谓是否一致，定义是否稳定用一般现在时？
+
+4. which / that、This / they 指向清楚吗？students / you / we 有没有跳转？
+
+5. involves / for 后是否正确用 -ing，consists of 是否误写成被动？
+
+6. 并列项词形和逻辑层级是否一致？修饰语与动作执行者对得上吗？
+
+7. 有没有具体解释和例子，而非 good / important / useful 的反复堆叠？
+
+8. 有没有过度名词化、长句或重复话？前一句是否自然引出后一句？
+
+9. 有没有不可数名词复数、漏冠词、比较对象错位、缩略词或标点错误？
+
+10. 来源和证据是否真实，表达有没有照抄？最后核对字数与题面要求。
+
+
+
+
 资料来源：Report_canvas.pdf（第三课，Unit 3 pp.28—48）；Report_tasks.docx。
