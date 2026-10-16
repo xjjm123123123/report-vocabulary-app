@@ -23,6 +23,11 @@
     for (const [id, w] of Object.entries(raw.words)) {
       if (!ids.has(id) || !w || !Number.isInteger(w.stage) || w.stage < 0 || w.stage > 7 || !Number.isInteger(w.reps) || w.reps < 1 || !Number.isInteger(w.lapses) || w.lapses < 0 || !dateOK(w.introduced) || !dateOK(w.lastDay) || !Number.isFinite(w.due)) throw new Error('单词记录不正确');
       result.words[id] = { stage: w.stage, reps: w.reps, lapses: w.lapses, introduced: w.introduced, lastDay: w.lastDay, due: w.due, lastRating: ['again','hard','good','easy'].includes(w.lastRating) ? w.lastRating : 'good' };
+      if (w.assessment !== undefined) {
+        const a = w.assessment;
+        if (!a || !['known','unsure','unknown'].includes(a.recognition) || typeof a.spellingCorrect !== 'boolean' || !dateOK(a.day)) throw new Error('认词或拼写记录不正确');
+        result.words[id].assessment = { recognition: a.recognition, spellingCorrect: a.spellingCorrect, day: a.day };
+      }
     }
     for (const [d, log] of Object.entries(raw.days)) {
       if (!dateOK(d) || !log || !Array.isArray(log.newIds) || !Array.isArray(log.reviewIds) || !Number.isInteger(log.answers) || log.answers < 0 || [...log.newIds, ...log.reviewIds].some(id => !ids.has(id))) throw new Error('每日记录不正确');
@@ -69,5 +74,12 @@
     while (state.days[d]?.answers) { n++; d = addDays(d,-1); }
     return n;
   }
-  return { VERSION, dayKey, addDays, fresh, validate, queues, rate, streak };
+  function assessAndRate(state, id, assessment, now = new Date()) {
+    if (!assessment || !['known','unsure','unknown'].includes(assessment.recognition) || typeof assessment.spellingCorrect !== 'boolean') throw new Error('请先完成认词与拼写检测');
+    const rating = !assessment.spellingCorrect ? 'again' : assessment.recognition === 'known' ? 'good' : 'hard';
+    const next = rate(state, id, rating, now);
+    next.words[id].assessment = { recognition: assessment.recognition, spellingCorrect: assessment.spellingCorrect, day: dayKey(now) };
+    return next;
+  }
+  return { VERSION, dayKey, addDays, fresh, validate, queues, rate, assessAndRate, streak };
 });
