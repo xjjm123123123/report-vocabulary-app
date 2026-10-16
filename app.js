@@ -1,6 +1,8 @@
 (() => {
   'use strict';
   const C = window.VocabCore, vocab = window.REPORT_VOCABULARY;
+  const pronunciations = window.REPORT_PRONUNCIATIONS || {};
+  let audioPlayer = null, audioButton = null, audioTimer = null, playbackId = 0;
   const byId = new Map(vocab.map(w => [w.id,w])), ids = vocab.map(w => w.id);
   const KEY = 'report-vocabulary-v1', DRAFT = 'report-writing-draft-v1';
   const main = document.getElementById('main');
@@ -24,7 +26,7 @@
     document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
     const q=C.queues(state,vocab); document.getElementById('today-count').textContent=q.newWords.length+q.reviewWords.length || '';
   }
-  function render(){updateNav();if(session){renderSession();return;} if(detail){renderDetail();return;} ({today:renderToday,library:renderLibrary,mistakes:renderLibrary,writing:renderWriting,settings:renderSettings}[view]||renderToday)();}
+  function render(){stopAudio();updateNav();if(session){renderSession();return;} if(detail){renderDetail();return;} ({today:renderToday,library:renderLibrary,mistakes:renderLibrary,writing:renderWriting,settings:renderSettings}[view]||renderToday)();}
   function navigate(next){view=next;session=null;detail=null;filter.page=1;render();window.scrollTo({top:0});}
   function renderToday(){
     const q=C.queues(state,vocab), learned=Object.keys(state.words).length, coreLearned=vocab.filter(w=>w.core&&state.words[w.id]).length;
@@ -52,8 +54,13 @@
     if(!list.length){toast(kind==='new'?'今日暂无待学新词':'暂时没有到期复习词');render();return;}
     detail=null;session={kind,ids:list.map(w=>w.id),index:0,undo:null};resetCard(session);renderSession();
   }
-  function wordHeading(w){return `<div class="word-title">${esc(w.word)}<button class="listen-button" data-action="speak" data-id="${esc(w.id)}" aria-label="朗读 ${esc(w.word)}">♪</button></div><div class="word-pos">${w.pos}</div>`;}
+  function wordHeading(w){
+    const pronunciation=pronunciations[w.id];
+    const audioRow=(accent,label)=>`<div class="pronunciation-row"><span class="accent-label">${label}</span><span class="ipa" lang="en">${esc(pronunciation?.[accent]||'暂未收录')}</span><button class="pronunciation-button" data-action="speak" data-id="${esc(w.id)}" data-accent="${accent}" data-speed="normal" aria-label="播放${label}${esc(w.word)}发音">▶ <span>发音</span></button><button class="pronunciation-button slow" data-action="speak" data-id="${esc(w.id)}" data-accent="${accent}" data-speed="slow" aria-label="慢速播放${label}${esc(w.word)}发音">慢速</button></div>`;
+    return `<div class="word-title">${esc(w.word)}</div><div class="word-pos">${w.pos}</div><div class="pronunciation-block">${audioRow('uk','英式')}${audioRow('us','美式')}</div>${pronunciation?.speechText?'<div class="pronunciation-note">按当前词性读音；多读音词会结合简短语境朗读。</div>':''}`;
+  }
   function renderSession(){
+    stopAudio();
     const s=session,done=s.index>=s.ids.length;
     if(done){
       const q=C.queues(state,vocab);
@@ -73,7 +80,7 @@
     }else if(spelling){
       card=`<div class="meaning">${esc(w.meaning)}</div><div class="word-pos">${w.pos}</div><div class="hidden-hint">根据中文，写出刚才那个英文单词。</div><form id="spelling-form"><input class="spelling-input" id="spell-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="输入英文单词" placeholder="输入英文单词" value="${esc(s.answer)}"><button class="button primary" type="submit">核对拼写 ↵</button></form>${s.recognition==='known'?'<button class="text-button meaning-correction" data-action="meaning-unknown">这个释义我没想起来，先学习</button>':''}`;
       actions='<div class="reveal-area"><button class="text-button" data-action="cannot-spell">不会拼写，查看答案</button></div>';
-      hint='英文、搭配和例句已隐藏。输入后按 Enter 核对拼写';
+      hint='英文、音标、搭配和例句已隐藏。输入后按 Enter 核对拼写';
     }else if(result){
       const firstWrong=s.firstCorrect===false, recognitionLabel={known:'认识',unsure:'不确定',unknown:'不认识'}[s.recognition];
       const assessment={recognition:s.recognition,spellingCorrect:s.firstCorrect};
@@ -138,12 +145,12 @@
     <div class="pagination"><span>第 ${filter.page} / ${pages} 页</span><div><button class="button secondary" data-action="prev-page" ${filter.page<=1?'disabled':''}>上一页</button><button class="button secondary" data-action="next-page" ${filter.page>=pages?'disabled':''}>下一页</button></div></div>
     <p class="footnote">词库按课程主题整理，非老师发布的考试指定词表。150个核心词优先服务定义、分类、特征描述与组成说明。</p>`;
   }
-  function renderDetail(){const w=byId.get(detail);main.innerHTML=top('把这个词，放进一句话。','词库浏览不计入每日学习；请在今日学习中完成认词与拼写检测。')+`<div class="session-top"><button class="back-button" data-action="close-detail">← 返回词库</button><span>${statusMarkup(w)}</span></div><article class="flashcard detail-panel"><div class="word-meta">${esc(w.category)} ${w.core?' · 考试核心':''}</div><div class="word-title">${esc(w.word)}<button class="listen-button" data-action="speak" data-id="${esc(w.id)}" aria-label="朗读 ${esc(w.word)}">♪</button></div><div class="word-pos">${w.pos}</div>${answerMarkup(w)}</article><p class="footnote">浏览后，试着使用“${esc(w.collocation)}”写一句关于大学、科研或小组合作的话。</p>`;}
+  function renderDetail(){stopAudio();const w=byId.get(detail);main.innerHTML=top('把这个词，放进一句话。','词库浏览不计入每日学习；请在今日学习中完成认词与拼写检测。')+`<div class="session-top"><button class="back-button" data-action="close-detail">← 返回词库</button><span>${statusMarkup(w)}</span></div><article class="flashcard detail-panel"><div class="word-meta">${esc(w.category)} ${w.core?' · 考试核心':''}</div>${wordHeading(w)}${answerMarkup(w)}</article><p class="footnote">浏览后，试着使用“${esc(w.collocation)}”写一句关于大学、科研或小组合作的话。</p>`;}
   function renderSettings(){main.innerHTML=top('每天的节奏，由你调整。','让新词数量与复习时间保持平衡。')+`
     <div class="settings-grid"><section class="settings-panel"><h2>学习计划</h2><form id="settings-form"><div class="form-group"><label for="daily-new">每天新词数</label><input id="daily-new" type="number" min="1" max="200" required value="${state.settings.dailyNew}"><p>建议每天15—30词。默认25词，6个学习日可完成150个核心词的初次学习。</p></div><div class="form-group"><label for="new-scope">新词范围</label><select id="new-scope"><option value="core" ${state.settings.scope==='core'?'selected':''}>先学150个考试核心词</option><option value="all" ${state.settings.scope==='all'?'selected':''}>完整1000词，核心词优先</option></select><p>切换范围不会删除记录，也不会隐藏已经学过的到期复习词。</p></div><div class="form-group"><label for="exam-date">考试日期</label><input id="exam-date" type="date" required value="${state.settings.examDate}"></div><button class="button primary" type="submit">保存学习计划</button></form></section>
     <section class="settings-panel"><h2>复习安排</h2><p>先判断是否认识，再进行拼写检测。系统根据两项结果自动安排复习。</p><div class="schedule-list"><div><strong>首轮不会拼</strong>10分钟后再次出现</div><div><strong>刚学会或不确定</strong>首轮拼对，明天再巩固</div><div><strong>认识且拼对</strong>按1、3、7、14、30、60、120天递进</div><div><strong>分别记录</strong>认词判断与首轮拼写结果</div></div><div class="review-summary">后续日期的复习从北京时间凌晨4点开始到期。翻页浏览不会改变复习时间，重复当天评分不会连续升级。</div></section>
     <section class="settings-panel"><h2>学习记录备份</h2><p>记录保存在当前设备的当前浏览器中。清理浏览器数据、换设备或换浏览器后，请导入备份恢复。</p><div class="backup-actions"><button class="button secondary" data-action="export">导出学习备份</button><button class="button secondary" data-action="import">导入备份</button></div><input type="file" id="import-file" accept="application/json,.json" hidden><p style="margin-top:18px;font-size:11px">备份包含学习计划、每日记录和每个单词的复习时间。写作练习草稿单独保存在本机，不包含在词汇备份里。</p></section>
-    <section class="settings-panel"><h2>怎么背更适合这门考试</h2><p>① 看英文，判断是否认识。<br>② 不认识的词先学释义和搭配。<br>③ 看中文，检测英文拼写。<br>④ 每天用3—5个新词写一个小段落。<br>⑤ 按提示复习，不把“学过”当成“掌握”。</p></section></div>`;}
+    <section class="settings-panel"><h2>发音与音标</h2><p>每个词提供英式、美式音标与发音按钮，可选择慢速跟读。音标中的 ˈ 标记主重音，ˌ 标记次重音。</p><p style="margin-top:12px">在线音频优先使用词典发音；设备英文语音可作为备用。多读音词结合当前词性朗读。拼写检测时隐藏音标并停止播放。</p></section><section class="settings-panel"><h2>怎么背更适合这门考试</h2><p>① 看英文，判断是否认识。<br>② 不认识的词先学释义和搭配。<br>③ 看中文，检测英文拼写。<br>④ 每天用3—5个新词写一个小段落。<br>⑤ 按提示复习，不把“学过”当成“掌握”。</p></section></div>`;}
   const templates=[
     {title:'描述型报告',english:'Descriptive report',intro:'回答：它是什么样的？先定义对象，再分方面描述特征。',text:'[Topic] is a type of [category] that [defining feature].\nOne important characteristic is [feature A].\nThis involves [explanation]. For example, [example].\nAnother characteristic is [feature B], which [function or effect].\nTogether, these characteristics [overall purpose].'},
     {title:'分类型报告',english:'Classifying report',intro:'回答：按什么标准，分成哪些类？同一层级保持分类标准一致。',text:'Based on [criterion], [topic] falls into [A] and [B].\nThe first category, [A], is characterized by [features].\nThis category includes [subtypes, if needed].\nThe second category, [B], [characteristics].'},
@@ -153,7 +160,50 @@
   function countWords(text){return(text.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)||[]).length;}
   function download(name,content,type='application/json'){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function exportBackup(){download(`写作词间_学习备份_${C.dayKey()}.json`,JSON.stringify(state,null,2));toast('已导出学习备份');}
-  function speak(id){if(!('speechSynthesis' in window)){toast('当前浏览器不支持朗读，仍可学习释义与搭配。');return;}const w=byId.get(id);window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w.word);u.lang='en-US';u.rate=.85;const voice=speechSynthesis.getVoices().find(v=>v.lang==='en-US')||speechSynthesis.getVoices().find(v=>v.lang.startsWith('en'));if(voice)u.voice=voice;u.onerror=()=>toast('朗读暂不可用，请检查浏览器是否安装英文语音。');speechSynthesis.speak(u);}
+  function stopAudio(){
+    playbackId++;clearTimeout(audioTimer);audioTimer=null;
+    if(audioPlayer){audioPlayer.pause();audioPlayer.removeAttribute('src');audioPlayer.load();audioPlayer=null;}
+    if('speechSynthesis' in window)window.speechSynthesis.cancel();
+    if(audioButton){audioButton.classList.remove('is-playing','is-loading');audioButton.removeAttribute('aria-busy');audioButton=null;}
+  }
+  function speak(id,accent='us',slow=false,button=null){
+    const w=byId.get(id);if(!w)return;
+    // Do not reveal pronunciation while the learner is recalling spelling.
+    if(session?.phase==='spell')return;
+    stopAudio();const token=playbackId;audioButton=button;
+    const lang=accent==='uk'?'en-GB':'en-US',rate=slow?.65:1;
+    const active=()=>token===playbackId;
+    const showState=name=>{if(!active()||!audioButton)return;audioButton.classList.remove('is-playing','is-loading');if(name)audioButton.classList.add(name);audioButton.setAttribute('aria-busy',name==='is-loading'?'true':'false');};
+    const finish=()=>{if(!active())return;clearTimeout(audioTimer);audioTimer=null;showState(null);audioPlayer=null;audioButton=null;};
+    const unavailable=()=>{finish();toast('暂时无法播放发音，请检查网络或设备的英文语音。');};
+    const browserSpeech=(onFailure)=>{
+      if(!active())return;
+      if(!('speechSynthesis' in window)||typeof window.SpeechSynthesisUtterance!=='function'){onFailure();return;}
+      clearTimeout(audioTimer);showState('is-loading');
+      let failed=false;
+      const fail=()=>{if(!active()||failed)return;failed=true;clearTimeout(audioTimer);window.speechSynthesis.cancel();onFailure();};
+      const u=new SpeechSynthesisUtterance(pronunciations[id]?.speechText||w.word);u.lang=lang;u.rate=slow?.65:.9;
+      const voice=window.speechSynthesis.getVoices().find(v=>v.lang.replace('_','-').toLowerCase()===lang.toLowerCase());if(voice)u.voice=voice;
+      u.onstart=()=>{if(!active()||failed)return;clearTimeout(audioTimer);showState('is-playing');};
+      u.onend=()=>{if(!failed)finish();};u.onerror=fail;
+      audioTimer=setTimeout(fail,5000);
+      try{window.speechSynthesis.speak(u);}catch{fail();}
+    };
+    const dictionaryAudio=(onFailure)=>{
+      if(!active())return;
+      if(typeof window.Audio!=='function'){onFailure();return;}
+      let failed=false;const player=new Audio();audioPlayer=player;player.preload='auto';player.playbackRate=rate;
+      const fail=()=>{if(!active()||failed)return;failed=true;clearTimeout(audioTimer);player.pause();player.removeAttribute('src');player.load();if(audioPlayer===player)audioPlayer=null;onFailure();};
+      player.onplaying=()=>{if(!active()||failed)return;clearTimeout(audioTimer);showState('is-playing');};
+      player.onended=()=>{if(!failed)finish();};player.onerror=fail;
+      player.src='https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(w.word)+'&type='+(accent==='uk'?'1':'2');
+      showState('is-loading');audioTimer=setTimeout(fail,6000);
+      try{const play=player.play();if(play?.catch)play.catch(fail);}catch{fail();}
+    };
+    // Homographs such as read/record use the course's verb or noun context.
+    if(pronunciations[id]?.speechText)browserSpeech(()=>dictionaryAudio(unavailable));
+    else dictionaryAudio(()=>browserSpeech(unavailable));
+  }
   document.addEventListener('click',event=>{
     const b=event.target.closest('button, a[data-view]');if(!b||b.disabled)return;
     if(b.dataset.view){navigate(b.dataset.view);return;}
@@ -164,7 +214,7 @@
       'start-spelling':startSpelling,'cannot-spell':()=>checkSpelling(true),'complete-word':completeWord,'retry-spelling':retrySpelling,'meaning-unknown':meaningUnknown,
       'exit-session':()=>navigate('today'),'close-detail':()=>{detail=null;render();},
       'prev-page':()=>{filter.page--;renderLibrary();},'next-page':()=>{filter.page++;renderLibrary();window.scrollTo({top:0});},
-      export:exportBackup,import:()=>document.getElementById('import-file').click(),speak:()=>speak(b.dataset.id),
+      export:exportBackup,import:()=>document.getElementById('import-file').click(),speak:()=>speak(b.dataset.id,b.dataset.accent,b.dataset.speed==='slow',b),
       'download-draft':()=>download(`Report练习_${C.dayKey()}.txt`,document.getElementById('writing-draft').value,'text/plain;charset=utf-8')
     };actions[b.dataset.action]?.();
   });
@@ -202,6 +252,7 @@
       else if(session.phase==='result'){event.preventDefault();completeWord();}
     }
   });
+  window.addEventListener('pagehide',stopAudio);
   window.addEventListener('storage',event=>{if(event.key===KEY&&event.newValue){try{state=C.validate(JSON.parse(event.newValue),ids);session=null;render();toast('已同步另一个页面的学习记录');}catch{}}});
   window.addEventListener('focus',()=>{if(!session&&!detail&&view==='today')renderToday();updateNav();});
   minuteTimer=setInterval(()=>{updateNav();if(!session&&!detail&&view==='today')renderToday();},30000);
