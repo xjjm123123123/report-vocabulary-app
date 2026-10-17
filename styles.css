@@ -143,3 +143,10 @@
 .body-strategy h4{font-size:13px;line-height:1.8;color:#76628f;margin:0 0 10px}
 .body-strategy p{font-size:12px;line-height:1.9}.body-strategy .body-patterns{font:14px/1.8 Georgia,serif;margin-top:12px;color:#867690}
 @media(max-width:760px){.body-strategies{grid-template-columns:1fr}.body-strategy{padding:16px}}
+.template-fixed{color:#174f91}
+.template-slot{color:#983700;background:#fff0da;border:1px solid #efc291;border-radius:4px;padding:1px 4px;font:600 .9em/1.9 system-ui,-apple-system,"PingFang SC",sans-serif;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.template-legend{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;line-height:1.8;margin:16px 0 10px}
+.template-legend>span{display:flex;align-items:center;gap:7px}
+.template-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.legend-fixed{background:#174f91}.legend-slot{background:#bf4c00}
+.guide-template-text{background:#f4f7fc;line-height:2.2}
