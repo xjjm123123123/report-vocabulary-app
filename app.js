@@ -8,8 +8,8 @@
   const main = document.getElementById('main');
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let state = C.fresh(), storageIssue = '', view = 'today', session = null, detail = null;
-  let filter = { search:'', category:'all', status:'all', page:1 }, pendingImport = null, toastTimer, minuteTimer;
-  try { const saved = localStorage.getItem(KEY); if (saved) state = C.validate(JSON.parse(saved), ids); }
+  let filter = { search:'', category:'all', status:'all', issue:'recognition', page:1 }, pendingImport = null, toastTimer, minuteTimer;
+  try { const saved = localStorage.getItem(KEY); if (saved) { state = C.validate(JSON.parse(saved), ids); localStorage.setItem(KEY,JSON.stringify(state)); } }
   catch (error) { storageIssue = '学习记录暂时无法读取。当前可继续学习，请导出备份以免丢失。'; }
   function persist(next) {
     state = next;
@@ -31,28 +31,32 @@
   function renderToday(){
     const q=C.queues(state,vocab), learned=Object.keys(state.words).length, coreLearned=vocab.filter(w=>w.core&&state.words[w.id]).length;
     const days=daysToExam(), countdown=days>0?days:days===0?'今天':'已过';
-    const waiting=q.waiting.length;
+    const waiting=q.pendingWords.length;
     main.innerHTML=top('今天，积累一点表达力。','先复习，再学新词。把每个单词放进你的报告里。')+`
-    <section class="hero"><div><div class="hero-tag">REPORT WRITING · 考试准备</div><h2>认识词义，更要会写一句话。</h2><p>词库共1000词，优先学习150个考试核心词。默认每天25个新词，学完核心词后可在设置中继续完整词库。</p></div><div class="countdown"><strong>${countdown}</strong><span>${days>0?'天后考试':days===0?'考试日':'可调整考试日期'}</span></div></section>
+    <section class="hero"><div><div class="hero-tag">REPORT WRITING · 考试准备</div><h2>认识词义，更要会写一句话。</h2><p>词库共1000词，优先学习150个考试核心词。每天新学${state.settings.dailyNew}个词，核心150词优先，之后继续完整词库。不认识或拼错的词会在本轮反复出现。</p></div><div class="countdown"><strong>${countdown}</strong><span>${days>0?'天后考试':days===0?'考试日':'可调整考试日期'}</span></div></section>
     <section class="stats" aria-label="学习统计">
     <div class="stat"><div class="stat-label">今天已学新词</div><div class="stat-number">${q.log.newIds.length}<small>/ ${state.settings.dailyNew}</small></div><div class="stat-sub">完成认词与拼写检测</div></div>
-    <div class="stat"><div class="stat-label">今天已复习</div><div class="stat-number">${q.log.reviewIds.length}<small>词</small></div><div class="stat-sub">按不同单词计数</div></div>
+    <div class="stat"><div class="stat-label">今天已复习</div><div class="stat-number">${q.log.reviewIds.length}<small>词</small></div><div class="stat-sub">累计 ${q.log.answers} 次检测 · 复习词去重</div></div>
     <div class="stat"><div class="stat-label">考试核心词</div><div class="stat-number">${coreLearned}<small>/ 150</small></div><div class="stat-sub">${150-coreLearned} 个尚未学习</div></div>
     <div class="stat"><div class="stat-label">累计学过</div><div class="stat-number">${learned}<small>/ 1000</small></div><div class="stat-sub">学过后仍需定期复习</div></div></section>
     <div class="section-head"><h2>今日学习</h2><span>${state.settings.scope==='core'?'考试核心词优先':'完整词库 · 核心词优先'}</span></div>
-    <section class="study-grid"><article class="study-tile"><div class="tile-label">DAILY REVIEW <span>01</span></div><div class="tile-count"><strong>${q.reviewWords.length}</strong><span>个词待复习</span></div><p>${q.reviewWords.length?'这些词已到复习时间。先判断是否认识，再看中文检测拼写。':waiting?`${waiting} 个没记住的词将在10分钟后再次出现。`:'暂时没有到期复习词，已学词会在后续日期自动出现。'}</p><button class="button review-btn wide" data-action="start-review" ${q.reviewWords.length?'':'disabled'}>开始复习 <span>↗</span></button></article>
-    <article class="study-tile"><div class="tile-label">NEW WORDS <span>02</span></div><div class="tile-count"><strong>${q.newWords.length}</strong><span>个新词待学习</span></div><p>${q.newWords.length?'先判断是否认识，再检测拼写。不认识的词先学释义、搭配和例句。':q.remainingUnseen===0&&state.settings.scope==='core'?'核心词已全部学过。可以在设置里开启完整1000词。':'今日新词计划已完成，继续用这些词写几句话。'}</p><button class="button primary wide" data-action="start-new" ${q.newWords.length?'':'disabled'}>学习新词 <span>↗</span></button></article></section>
+    <section class="study-grid"><article class="study-tile"><div class="tile-label">DAILY REVIEW <span>01</span></div><div class="tile-count"><strong>${q.reviewWords.length}</strong><span>个历史难词可复习</span></div><p>认词问题 ${q.recognitionWords.length} 词 · 拼写问题 ${q.spellingWords.length} 词。同一个词可属于两组，今天可反复复习。</p><button class="button review-btn wide" data-action="start-review" ${q.reviewWords.length?'':'disabled'}>复习全部难词 <span>↗</span></button><button class="text-button" data-view="mistakes">查看分类记录 →</button></article>
+    <article class="study-tile"><div class="tile-label">NEW WORDS <span>02</span></div><div class="tile-count"><strong>${q.newWords.length}</strong><span>个新词待学习</span></div><p>${q.newWords.length?'先认词，再检测拼写。没掌握的词隔几个词重新出现，直到连续两次认识且首轮拼对。':q.remainingUnseen===0?'当前范围的词已全部学过，可继续巩固难词。':'今日新词数量已完成，可继续反复复习。'}</p><button class="button primary wide" data-action="start-new" ${q.newWords.length||waiting?'':'disabled'}>${waiting?'继续新词与巩固':'学习新词'} <span>↗</span></button></article></section>
+    ${waiting?`<div class="repeat-callout"><strong>${waiting} 个词尚未完成巩固</strong><p>已保存练习进度，随时继续。每次检测失败都会重新要求连续两次通过。</p><button class="button secondary" data-action="start-pending">继续巩固</button></div>`:''}
+    <div class="review-shortcuts"><button class="button secondary" data-action="start-recognition" ${q.recognitionWords.length?'':'disabled'}>复习认词问题 · ${q.recognitionWords.length}</button><button class="button secondary" data-action="start-spelling-review" ${q.spellingWords.length?'':'disabled'}>复习拼写问题 · ${q.spellingWords.length}</button><button class="text-button" data-action="start-all" ${q.learnedWords.length?'':'disabled'}>全部已学词再练一轮</button></div>
     <section class="lower-grid"><div><div class="section-head"><h2>最近7天</h2><span>新词 + 复习词</span></div><div class="week-chart">${weekChart(q.today)}</div></div><div class="writing-tip"><div class="section-head"><h2>今天的一组表达</h2><button class="text-button" data-view="writing">去写一句 ↗</button></div><div class="phrase">evaluate evidence</div><p>评估证据<br>Researchers evaluate evidence before drawing conclusions.</p></div></section>
-    <p class="footnote">复习间隔随记忆评分变化：1、3、7、14、30天及以后。没记住的词10分钟后重试。每日统计按北京时间更新。${waiting?`当前有 ${waiting} 个词等待再次复习。`:''}</p>`;
+    <p class="footnote">每天新词按不同单词计数，重复练习不占新词名额。认词与拼写错误分别保留历史；已通过的难词仍可每天反复复习。每日统计按北京时间更新。</p>`;
   }
-  function weekChart(today){const counts=Array.from({length:7},(_,i)=>{const d=C.addDays(today,i-6),l=state.days[d];return{d,n:l?l.newIds.length+l.reviewIds.length:0};});const max=Math.max(5,...counts.map(c=>c.n));return counts.map(c=>`<div class="day-column ${c.d===today?'current':''}"><div class="num">${c.n||''}</div><div class="day-bar" style="height:${Math.max(4,c.n/max*64)}px"></div><span>${c.d===today?'今天':`${Number(c.d.slice(5,7))}/${Number(c.d.slice(8))}`}</span></div>`).join('');}
+  function weekChart(today){const counts=Array.from({length:7},(_,i)=>{const d=C.addDays(today,i-6),l=state.days[d];return{d,n:l?new Set([...l.newIds,...l.reviewIds]).size:0};});const max=Math.max(5,...counts.map(c=>c.n));return counts.map(c=>`<div class="day-column ${c.d===today?'current':''}"><div class="num">${c.n||''}</div><div class="day-bar" style="height:${Math.max(4,c.n/max*64)}px"></div><span>${c.d===today?'今天':`${Number(c.d.slice(5,7))}/${Number(c.d.slice(8))}`}</span></div>`).join('');}
   function resetCard(s){
     Object.assign(s,{phase:'recognize',recognition:null,answer:'',correct:false,firstCorrect:null,firstAnswer:'',retried:false});
   }
   function startSession(kind){
-    const q=C.queues(state,vocab), list=kind==='new'?q.newWords:q.reviewWords;
-    if(!list.length){toast(kind==='new'?'今日暂无待学新词':'暂时没有到期复习词');render();return;}
-    detail=null;session={kind,ids:list.map(w=>w.id),index:0,undo:null};resetCard(session);renderSession();
+    const q=C.queues(state,vocab), lists={new:[...q.pendingWords,...q.newWords],review:q.reviewWords,recognition:q.recognitionWords,'spelling-review':q.spellingWords,pending:q.pendingWords,all:q.learnedWords};
+    const list=lists[kind]||[];
+    if(!list.length){toast(kind==='new'?'今日暂无新词或待巩固词':'这个分类暂时没有可练习的词');render();return;}
+    const selected=[...new Set(list.map(w=>w.id))];
+    detail=null;session={kind,ids:selected,index:0,total:selected.length,doneIds:[],undo:null};resetCard(session);renderSession();
   }
   function wordHeading(w){
     const pronunciation=pronunciations[w.id];
@@ -63,8 +67,7 @@
     stopAudio();
     const s=session,done=s.index>=s.ids.length;
     if(done){
-      const q=C.queues(state,vocab);
-      main.innerHTML=top('这一轮，完成了。','停下来回想一下：今天哪些词可以写进你的报告？')+`<div class="empty-state" style="margin-top:35px"><div class="eyebrow">SESSION COMPLETE</div><h2>完成 ${s.ids.length} 个${s.kind==='new'?'新词':'复习词'}</h2><p>认词与首轮拼写结果已保存，复习时间已自动安排。${q.waiting.length?`还有 ${q.waiting.length} 个词需要再练，10分钟后可再次复习。`:''}下次用同一个浏览器打开，就能继续学习。</p><button class="button primary" data-action="exit-session">返回今日学习</button> <button class="button secondary" data-view="writing">用新词写一句</button>${s.undo?'<div><button class="text-button" data-action="undo">撤销上一个词的记录</button></div>':''}</div>`;return;
+      main.innerHTML=top('这一轮，完成了。','本轮每个词都已通过认词与拼写检测。')+`<div class="empty-state" style="margin-top:35px"><div class="eyebrow">SESSION COMPLETE</div><h2>完成 ${s.total} 个词 · ${s.index} 次检测</h2><p>本轮难词已连续两次认识且首轮拼对。历史认词与拼写问题仍分别保留，今天可以继续再练。</p><button class="button primary" data-action="restart-session">再练一轮</button> <button class="button secondary" data-action="exit-session">返回今日学习</button> <button class="text-button" data-view="writing">用新词写一句</button>${s.undo?'<div><button class="text-button" data-action="undo">撤销上一个词的记录</button></div>':''}</div>`;return;
     }
     const w=byId.get(s.ids[s.index]);
     const recognizing=s.phase==='recognize',studying=s.phase==='study',spelling=s.phase==='spell',result=s.phase==='result';
@@ -84,17 +87,17 @@
     }else if(result){
       const firstWrong=s.firstCorrect===false, recognitionLabel={known:'认识',unsure:'不确定',unknown:'不认识'}[s.recognition];
       const assessment={recognition:s.recognition,spellingCorrect:s.firstCorrect};
-      const next=C.assessAndRate(state,w.id,assessment);const due=next.words[w.id].due;
-      const interval=next.words[w.id].lastRating==='again'?'10分钟后':`${Math.round((Date.parse(C.dayKey(new Date(due))+'T00:00:00Z')-Date.parse(C.dayKey()+'T00:00:00Z'))/86400000)}天后`;
+      const next=C.assessAndRate(state,w.id,assessment),left=C.remaining(next.words[w.id]);
       card=`<div class="result-banner ${s.correct?'correct':'incorrect'}">${s.correct?'✓ 拼写正确':s.answer?'拼写需要再练':'还不会拼写'}<span>认词判断：${recognitionLabel}${s.retried?' · 首轮'+(firstWrong?'未拼对':'拼写正确'):''}</span></div>`+wordHeading(w)+answerMarkup(w)+(!s.correct?`<div class="spell-feedback">${s.answer?'你的输入：'+esc(s.answer):'下次先回忆，再试着写出来。'}</div>`:'');
-      actions=`<div class="result-actions">${!s.correct?'<button class="button secondary" data-action="retry-spelling">再练一次拼写</button>':''}<button class="button primary" data-action="complete-word">${s.index+1===s.ids.length?'完成这一轮':'保存并学习下一个'} ↵</button></div><p class="review-plan">${interval}复习${firstWrong?'。首轮没拼对，纠正后仍安排一次短期复习。':s.recognition!=='known'?'。刚学会的词先在短期内巩固。':'。会认也会拼，按正常间隔巩固。'}</p>`;
+      actions=`<div class="result-actions">${!s.correct?'<button class="button secondary" data-action="retry-spelling">再练一次拼写</button>':''}<button class="button primary" data-action="complete-word">保存并继续 ↵</button></div><p class="review-plan">${left?`本轮还需连续通过 ${left} 次。隔几个词再次出现，认词与首轮拼写都通过才计入。`:'本轮检测通过，历史问题仍保留，可随时再练。'}${firstWrong?' 刚看答案后的改正不算独立通过。':''}</p>`;
       hint='按 Enter 保存当前词并继续。需要修改判断时，可撤销上一个词';
     }
-    const title=s.kind==='new'?'每日新词':'到期复习';
+    const title={new:'每日新词与巩固',review:'历史难词复习',recognition:'认词问题复习','spelling-review':'拼写问题复习',pending:'继续巩固',all:'全部已学词复习'}[s.kind];
     main.innerHTML=top(title,'先判断认不认识，再检测会不会拼写。')+`
-    <div class="session-top"><button class="back-button" data-action="exit-session">← 返回今日学习</button><span>第 ${s.index+1} / ${s.ids.length} 个词</span>${s.undo?'<button class="text-button" data-action="undo">撤销上一个词</button>':'<span></span>'}</div>
-    <div class="progress-track"><div class="progress-fill" style="width:${s.index/s.ids.length*100}%"></div></div>
+    <div class="session-top"><button class="back-button" data-action="exit-session">← 返回今日学习</button><span>已完成 ${s.doneIds.length} / ${s.total} 个词 · 第 ${s.index+1} 次检测</span>${s.undo?'<button class="text-button" data-action="undo">撤销上一个词</button>':'<span></span>'}</div>
+    <div class="progress-track"><div class="progress-fill" style="width:${s.doneIds.length/s.total*100}%"></div></div>
     <ol class="learning-steps" aria-label="学习步骤"><li ${recognizing?'aria-current="step"':''}>① 判断是否认识</li><li ${spelling?'aria-current="step"':''}>② 检测拼写</li><li ${result?'aria-current="step"':''}>③ 查看结果</li></ol>
+    ${C.remaining(state.words[w.id])?`<p class="repeat-status">巩固中 · 还需连续通过 ${C.remaining(state.words[w.id])} 次</p>`:''}
     ${studying?'<p class="stage-message">先学习这个词，再检测拼写</p>':''}
     <article class="flashcard" data-phase="${s.phase}" aria-live="polite"><div class="word-meta">${esc(w.category)} ${w.core?' · 考试核心':''}</div>${card}</article>
     ${actions}<p class="keyboard-hint">${hint}</p>`;
@@ -117,18 +120,28 @@
   }
   function completeWord(){
     if(!session||session.phase!=='result')return;
-    const s=session,id=s.ids[s.index];s.undo={state:JSON.parse(JSON.stringify(state)),index:s.index};
-    persist(C.assessAndRate(state,id,{recognition:s.recognition,spellingCorrect:s.firstCorrect}));
+    const s=session,id=s.ids[s.index];s.undo={state:JSON.parse(JSON.stringify(state)),index:s.index,ids:[...s.ids],doneIds:[...s.doneIds]};
+    const next=C.assessAndRate(state,id,{recognition:s.recognition,spellingCorrect:s.firstCorrect});persist(next);
+    if(C.remaining(next.words[id])>0){
+      s.doneIds=s.doneIds.filter(x=>x!==id);
+      if(!s.ids.slice(s.index+1).includes(id))s.ids.splice(Math.min(s.index+4,s.ids.length),0,id);
+    }else if(!s.doneIds.includes(id))s.doneIds.push(id);
     s.index++;resetCard(s);updateNav();renderSession();
   }
   function retrySpelling(){if(!session||session.phase!=='result')return;session.phase='spell';session.answer='';session.retried=true;renderSession();}
   function meaningUnknown(){if(!session||session.phase!=='spell')return;session.recognition='unknown';session.phase='study';session.answer='';renderSession();}
-  function undo(){if(!session?.undo)return;const u=session.undo;persist(u.state);session.index=u.index;resetCard(session);session.undo=null;render();toast('已撤销上一个词的学习记录');}
-  function statusMarkup(w){const x=state.words[w.id];if(!x)return '<span class="status">未学习</span>';if(x.due<=Date.now())return '<span class="status due">待复习</span>';if(x.stage>=4)return '<span class="status known">逐渐巩固</span>';return `<span class="status">${C.dayKey(new Date(x.due)).slice(5)} 复习</span>`;}
+  function undo(){if(!session?.undo)return;const u=session.undo;persist(u.state);session.index=u.index;session.ids=[...u.ids];session.doneIds=[...u.doneIds];resetCard(session);session.undo=null;render();toast('已撤销上一个词的学习记录');}
+  function statusMarkup(w){const x=state.words[w.id];if(!x)return '<span class="status">未学习</span>';if(C.remaining(x)>0)return '<span class="status due">待巩固 · '+C.remaining(x)+' 次</span>';if(Object.values(C.difficulties(x)).some(Boolean))return '<span class="status">历史难词 · 随时复习</span>';if(x.due<=Date.now())return '<span class="status due">待复习</span>';if(x.stage>=4)return '<span class="status known">逐渐巩固</span>';return `<span class="status">${C.dayKey(new Date(x.due)).slice(5)} 复习</span>`;}
+  let filteredReviewIds=[];
+  function startFilteredReview(){
+    if(!filteredReviewIds.length){toast('当前筛选没有可练习的词');return;}
+    const selected=[...filteredReviewIds];detail=null;session={kind:'review',ids:selected,index:0,total:selected.length,doneIds:[],undo:null};resetCard(session);renderSession();
+  }
   function renderLibrary(){
     const mistakes=view==='mistakes';
     const categories=[...new Set(vocab.map(w=>w.category))];
-    let list=vocab.filter(w=>!mistakes||state.words[w.id]?.lapses>0||state.words[w.id]?.lastRating==='hard');
+    const q=C.queues(state,vocab);
+    let list=mistakes?({recognition:q.recognitionWords,spelling:q.spellingWords,legacy:q.legacyWords,all:q.reviewWords}[filter.issue]||q.recognitionWords):[...vocab];
     if(filter.search){const query=filter.search.toLowerCase();list=list.filter(w=>[w.word,w.meaning,w.collocation,w.category].some(s=>s.toLowerCase().includes(query)));}
     if(filter.category!=='all')list=list.filter(w=>w.category===filter.category);
     if(filter.status==='core')list=list.filter(w=>w.core);
@@ -136,19 +149,21 @@
     if(filter.status==='learned')list=list.filter(w=>state.words[w.id]);
     if(filter.status==='due')list=list.filter(w=>state.words[w.id]?.due<=Date.now());
     list.sort((a,b)=>Number(b.core)-Number(a.core)||a.rank-b.rank);
+    filteredReviewIds=list.map(w=>w.id);
     const total=list.length,pages=Math.max(1,Math.ceil(total/20));filter.page=Math.min(filter.page,pages);
     const shown=list.slice((filter.page-1)*20,filter.page*20);
-    main.innerHTML=top(mistakes?'难词，再见一面。':'1000词，围绕你的报告。',mistakes?'记录曾经没记住或觉得困难的词。正常复习仍按到期时间安排。':'20个主题，包含中文释义、常用搭配和英文示例。核心150词另有例句译文。')+`
+    main.innerHTML=top(mistakes?'认词与拼写，分开再练。':'1000词，围绕你的报告。',mistakes?'历史认词与拼写问题分别保存，通过后仍可重复练习。同一词可能同时属于两组。':'20个主题，包含中文释义、常用搭配和英文示例。核心150词另有例句译文。')+`
+    ${mistakes?`<div class="issue-tabs" aria-label="难词分类">${[['recognition','认词问题',q.recognitionWords.length],['spelling','拼写问题',q.spellingWords.length],['all','全部难词',q.reviewWords.length],...(q.legacyWords.length?[['legacy','旧记录类型不明',q.legacyWords.length]]:[])].map(([key,label,n])=>`<button class="button ${filter.issue===key?'primary':'secondary'}" data-action="issue-filter" data-issue="${key}" aria-pressed="${filter.issue===key}">${label} · ${n}</button>`).join('')}</div><p class="issue-description">${filter.issue==='recognition'?'曾经不认识或不确定的词；记录不会被后来的正确回答覆盖。':filter.issue==='spelling'?'曾经首轮拼错或不会拼写的词；重试后拼对仍保留错误历史。':filter.issue==='legacy'?'旧版记录未保存足够的错误类型，暂不猜测分类。原来错误的类型无法恢复；今后的检测会分别记录明确的认词与拼写结果。':'合并两类历史问题并去重，均可反复练习。'}</p><button class="text-button" data-action="review-filter">复习当前筛选结果 →</button>`:''}
     <div class="library-controls"><input class="search" id="search" type="search" aria-label="搜索单词、释义或搭配" placeholder="搜索单词、中文或搭配…" value="${esc(filter.search)}"><select id="category-filter" aria-label="按主题筛选"><option value="all">全部主题</option>${categories.map(c=>`<option ${filter.category===c?'selected':''}>${esc(c)}</option>`).join('')}</select><select id="status-filter" aria-label="按状态筛选">${[['all','全部单词'],['core','考试核心150词'],['unseen','尚未学习'],['learned','已经学过'],['due','到期复习']].map(([v,label])=>`<option value="${v}" ${filter.status===v?'selected':''}>${label}</option>`).join('')}</select></div>
-    <div class="section-head"><h2>${mistakes?'我的难词':'词汇清单'}</h2><span>找到 ${total} 个词 · 点击查看搭配和例句</span></div>
-    <div class="word-table"><table><thead><tr><th>英文单词</th><th>中文释义</th><th class="coll-col">常用搭配</th><th>学习状态</th></tr></thead><tbody>${shown.length?shown.map(w=>`<tr><td><button class="library-word" data-word="${esc(w.id)}">${esc(w.word)}${w.core?'<small>核心</small>':''}</button></td><td>${esc(w.meaning)}</td><td class="coll-col coll">${esc(w.collocation)}</td><td>${statusMarkup(w)}</td></tr>`).join(''):'<tr><td colspan="4" class="empty-row">'+(mistakes?'还没有难词记录。完成学习后，这里会自动更新。':'没有符合条件的单词。')+'</td></tr>'}</tbody></table></div>
+    <div class="section-head"><h2>${mistakes?'分类复习':'词汇清单'}</h2><span>找到 ${total} 个词 · 点击查看搭配和例句</span></div>
+    <div class="word-table"><table><thead><tr><th>英文单词</th><th>中文释义</th><th class="coll-col">常用搭配</th><th>学习状态</th></tr></thead><tbody>${shown.length?shown.map(w=>`<tr><td><button class="library-word" data-word="${esc(w.id)}">${esc(w.word)}${w.core?'<small>核心</small>':''}</button></td><td>${esc(w.meaning)}</td><td class="coll-col coll">${esc(w.collocation)}</td><td>${statusMarkup(w)}${mistakes?`<div class="issue-labels">${C.difficulties(state.words[w.id]).recognition?'认词 ':''}${C.difficulties(state.words[w.id]).spelling?'拼写 ':''}${C.difficulties(state.words[w.id]).legacy?'旧记录':''}</div>`:''}</td></tr>`).join(''):'<tr><td colspan="4" class="empty-row">'+(mistakes?'还没有难词记录。完成学习后，这里会自动更新。':'没有符合条件的单词。')+'</td></tr>'}</tbody></table></div>
     <div class="pagination"><span>第 ${filter.page} / ${pages} 页</span><div><button class="button secondary" data-action="prev-page" ${filter.page<=1?'disabled':''}>上一页</button><button class="button secondary" data-action="next-page" ${filter.page>=pages?'disabled':''}>下一页</button></div></div>
     <p class="footnote">词库按课程主题整理，非老师发布的考试指定词表。150个核心词优先服务定义、分类、特征描述与组成说明。</p>`;
   }
   function renderDetail(){stopAudio();const w=byId.get(detail);main.innerHTML=top('把这个词，放进一句话。','词库浏览不计入每日学习；请在今日学习中完成认词与拼写检测。')+`<div class="session-top"><button class="back-button" data-action="close-detail">← 返回词库</button><span>${statusMarkup(w)}</span></div><article class="flashcard detail-panel"><div class="word-meta">${esc(w.category)} ${w.core?' · 考试核心':''}</div>${wordHeading(w)}${answerMarkup(w)}</article><p class="footnote">浏览后，试着使用“${esc(w.collocation)}”写一句关于大学、科研或小组合作的话。</p>`;}
   function renderSettings(){main.innerHTML=top('每天的节奏，由你调整。','让新词数量与复习时间保持平衡。')+`
-    <div class="settings-grid"><section class="settings-panel"><h2>学习计划</h2><form id="settings-form"><div class="form-group"><label for="daily-new">每天新词数</label><input id="daily-new" type="number" min="1" max="200" required value="${state.settings.dailyNew}"><p>建议每天15—30词。默认25词，6个学习日可完成150个核心词的初次学习。</p></div><div class="form-group"><label for="new-scope">新词范围</label><select id="new-scope"><option value="core" ${state.settings.scope==='core'?'selected':''}>先学150个考试核心词</option><option value="all" ${state.settings.scope==='all'?'selected':''}>完整1000词，核心词优先</option></select><p>切换范围不会删除记录，也不会隐藏已经学过的到期复习词。</p></div><div class="form-group"><label for="exam-date">考试日期</label><input id="exam-date" type="date" required value="${state.settings.examDate}"></div><button class="button primary" type="submit">保存学习计划</button></form></section>
-    <section class="settings-panel"><h2>复习安排</h2><p>先判断是否认识，再进行拼写检测。系统根据两项结果自动安排复习。</p><div class="schedule-list"><div><strong>首轮不会拼</strong>10分钟后再次出现</div><div><strong>刚学会或不确定</strong>首轮拼对，明天再巩固</div><div><strong>认识且拼对</strong>按1、3、7、14、30、60、120天递进</div><div><strong>分别记录</strong>认词判断与首轮拼写结果</div></div><div class="review-summary">后续日期的复习从北京时间凌晨4点开始到期。翻页浏览不会改变复习时间，重复当天评分不会连续升级。</div></section>
+    <div class="settings-grid"><section class="settings-panel"><h2>学习计划</h2><form id="settings-form"><div class="form-group"><label for="daily-new">每天新词数</label><input id="daily-new" type="number" min="1" max="200" required value="${state.settings.dailyNew}"><p>默认每天150个不同新词；重复练习不占用新词名额。完整词库保持核心词优先。</p></div><div class="form-group"><label for="new-scope">新词范围</label><select id="new-scope"><option value="core" ${state.settings.scope==='core'?'selected':''}>先学150个考试核心词</option><option value="all" ${state.settings.scope==='all'?'selected':''}>完整1000词，核心词优先</option></select><p>切换新词范围不影响历史难词或已学词的反复复习。</p></div><div class="form-group"><label for="exam-date">考试日期</label><input id="exam-date" type="date" required value="${state.settings.examDate}"></div><button class="button primary" type="submit">保存学习计划</button></form></section>
+    <section class="settings-panel"><h2>反复练到会</h2><p>先认词，再检测拼写。认词不确定／不认识或首轮拼写错，都会加入本轮巩固，隔最多3个词重新出现。</p><div class="schedule-list"><div><strong>连续两次通过</strong>认识且首轮拼对才结束巩固</div><div><strong>失败就重新计数</strong>看答案后立即改对不算通过</div><div><strong>每天随时复习</strong>历史难词或全部已学词不限次数</div><div><strong>分类保留</strong>认词问题与拼写问题互不覆盖</div></div><div class="review-summary">练习中途退出也会保存已完成检测与剩余巩固次数。重复练习不增加当天不同新词数，也不会连续跳过多个长期记忆阶段。</div></section>
     <section class="settings-panel"><h2>学习记录备份</h2><p>记录保存在当前设备的当前浏览器中。清理浏览器数据、换设备或换浏览器后，请导入备份恢复。</p><div class="backup-actions"><button class="button secondary" data-action="export">导出学习备份</button><button class="button secondary" data-action="import">导入备份</button></div><input type="file" id="import-file" accept="application/json,.json" hidden><p style="margin-top:18px;font-size:11px">备份包含学习计划、每日记录和每个单词的复习时间。写作练习草稿单独保存在本机，不包含在词汇备份里。</p></section>
     <section class="settings-panel"><h2>发音与音标</h2><p>每个词提供英式、美式音标与发音按钮，可选择慢速跟读。音标中的 ˈ 标记主重音，ˌ 标记次重音。</p><p style="margin-top:12px">在线音频优先使用词典发音；设备英文语音可作为备用。多读音词结合当前词性朗读。拼写检测时隐藏音标并停止播放。</p></section><section class="settings-panel"><h2>怎么背更适合这门考试</h2><p>① 看英文，判断是否认识。<br>② 不认识的词先学释义和搭配。<br>③ 看中文，检测英文拼写。<br>④ 每天用3—5个新词写一个小段落。<br>⑤ 按提示复习，不把“学过”当成“掌握”。</p></section></div>`;}
   const writingGuide = window.REPORT_WRITING_GUIDE;
@@ -229,7 +244,9 @@
     if(b.dataset.word){detail=b.dataset.word;renderDetail();window.scrollTo({top:0});return;}
     if(b.dataset.recognition){recognize(b.dataset.recognition);return;}
     const actions={
-      'start-new':()=>startSession('new'),'start-review':()=>startSession('review'),undo,
+      'start-new':()=>startSession('new'),'start-review':()=>startSession('review'),'start-recognition':()=>startSession('recognition'),'start-spelling-review':()=>startSession('spelling-review'),'start-pending':()=>startSession('pending'),'start-all':()=>startSession('all'),
+      'restart-session':()=>{const old=session;session=null;detail=null;session={kind:old.kind,ids:[...new Set(old.ids)],index:0,total:old.total,doneIds:[],undo:null};resetCard(session);renderSession();},
+      'issue-filter':()=>{filter.issue=b.dataset.issue;filter.page=1;renderLibrary();},'review-filter':()=>startFilteredReview(),undo,
       'start-spelling':startSpelling,'cannot-spell':()=>checkSpelling(true),'complete-word':completeWord,'retry-spelling':retrySpelling,'meaning-unknown':meaningUnknown,
       'exit-session':()=>navigate('today'),'close-detail':()=>{detail=null;render();},
       'prev-page':()=>{filter.page--;renderLibrary();},'next-page':()=>{filter.page++;renderLibrary();window.scrollTo({top:0});},
@@ -258,7 +275,7 @@
     if(event.target.id!=='settings-form')return;event.preventDefault();
     const num=Number(document.getElementById('daily-new').value),exam=document.getElementById('exam-date').value;
     if(!Number.isInteger(num)||num<1||num>200||!exam){toast('请填写有效的新词数量和考试日期');return;}
-    const next=JSON.parse(JSON.stringify(state));next.settings={dailyNew:num,scope:document.getElementById('new-scope').value,examDate:exam};
+    const next=JSON.parse(JSON.stringify(state));next.settings={dailyNew:num,scope:document.getElementById('new-scope').value,examDate:exam,planVersion:2};
     try{C.validate(next,ids);persist(next);render();toast('学习计划已保存');}catch{toast('请检查日期与学习设置');}
   });
   document.getElementById('cancel-import').onclick=()=>{pendingImport=null;document.getElementById('confirm-dialog').close();};
