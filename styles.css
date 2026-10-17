@@ -104,3 +104,28 @@
 .repeat-status{text-align:center;font-size:12px;color:#997957;margin:-8px 0 20px}
 .issue-description{font-size:13px;margin-bottom:8px}.issue-labels{font-size:10px;color:#9a7faf;margin-top:6px}
 @media(max-width:760px){.session-top{gap:10px;flex-wrap:wrap;line-height:1.8}.repeat-callout{padding:18px}.review-shortcuts .button,.issue-tabs .button{font-size:12px;padding:10px 12px}}
+
+/* Vertically aligned spelling comparison, with text labels as well as color. */
+.spelling-comparison{max-width:100%;text-align:left;border:2px solid #d5dcd8;border-radius:12px;padding:20px 22px;margin-bottom:22px;background:#fcfdfc}
+.comparison-label{font-size:13px;font-weight:650;color:#206643;margin-bottom:10px;letter-spacing:.5px}
+.spelling-diff-scroll{overflow-x:auto;max-width:100%;padding-bottom:4px}
+.spelling-diff-table{min-width:max-content}
+.diff-row{display:grid;grid-template-columns:repeat(var(--diff-columns),minmax(1.15em,1fr));gap:4px;font:32px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0;text-align:center;margin:0;overflow-wrap:normal}
+.diff-letter{border-radius:5px;padding:2px 0;border-bottom:3px solid transparent;min-width:0}
+.correct-row{color:#16633b;background:#edf8ef;border:1px solid #b2d7ba;padding:9px;border-radius:8px}
+.correct-row .wrong,.correct-row .missing{background:#c9efd2;border-bottom-color:#267f48;font-weight:700}
+.correct-row .extra{color:#7f867e;background:#f4f4ed}
+.input-label{color:#455165;margin-top:20px}
+.input-row{background:#f6f7fa;border:1px solid #d4d8e0;padding:9px;border-radius:8px;color:#485568}
+.input-row .wrong{color:#b41e31;background:#ffdce2;border-bottom-color:#c82940;font-weight:750}
+.input-row .missing{color:#b41e31;background:#fff1f3;border:2px dashed #c82940;padding:0}
+.input-row .extra{color:#a24500;background:#ffe1b7;border-bottom-color:#c5610b;font-weight:750}
+.diff-legend{display:flex;flex-wrap:wrap;gap:8px 15px;margin-top:16px;font-size:11px;line-height:1.7}
+.diff-legend span{border-radius:4px;padding:3px 7px}
+.legend-correct{color:#16633b;background:#d7f1df}.legend-wrong{color:#ad1e31;background:#ffdce2}.legend-extra{color:#9a4200;background:#ffe1b7}
+.comparison-note{font-size:12px;margin-top:12px;color:#946373}
+.long-spelling-input{font:22px/1.7 ui-monospace,Menlo,monospace;color:#b41e31;background:#fff0f3;padding:12px;border-radius:7px;overflow-wrap:anywhere}
+.first-spelling-attempt{text-align:left;margin:0 0 20px;font-size:12px;color:#8c6d86}
+.first-spelling-attempt summary{cursor:pointer;padding:7px 0}.first-spelling-attempt .spelling-comparison{margin:10px 0}
+@media(max-width:760px){.spelling-comparison{padding:15px 12px}.diff-row{font-size:19px;gap:2px}.correct-row,.input-row{padding:6px}.diff-legend{gap:6px;font-size:10px}.comparison-label{font-size:12px}.input-label{margin-top:16px}}
+@media(max-width:760px){.diff-row{font-size:16px;grid-template-columns:repeat(var(--diff-columns),minmax(1.05em,1fr));gap:1px}}

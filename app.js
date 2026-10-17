@@ -58,10 +58,36 @@
     const selected=[...new Set(list.map(w=>w.id))];
     detail=null;session={kind,ids:selected,index:0,total:selected.length,doneIds:[],undo:null};resetCard(session);renderSession();
   }
-  function wordHeading(w){
+  function spellingComparison(expected,answer,label='你的输入'){
+    // Align insertions and omissions so one missing letter does not mark the entire suffix wrong.
+    const correct=Array.from(expected),typed=Array.from(answer),limit=160;
+    if(typed.length>limit)return `<div class="spelling-comparison"><div class="comparison-label">正确答案</div><div class="word-title">${esc(expected)}</div><div class="comparison-label">${esc(label)}</div><div class="long-spelling-input">${esc(answer)}</div><p class="comparison-note">输入过长，请对照上方正确单词。</p></div>`;
+    const a=correct.map(c=>c.toLowerCase()),b=typed.map(c=>c.toLowerCase());
+    const dp=Array.from({length:a.length+1},()=>Array(b.length+1).fill(0));
+    for(let i=0;i<=a.length;i++)dp[i][0]=i;
+    for(let j=0;j<=b.length;j++)dp[0][j]=j;
+    for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){
+      dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+      if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])dp[i][j]=Math.min(dp[i][j],dp[i-2][j-2]+1);
+    }
+    const columns=[];let i=a.length,j=b.length;
+    while(i||j){
+      if(i&&j&&a[i-1]===b[j-1]&&dp[i][j]===dp[i-1][j-1]){columns.push({correct:correct[--i],input:typed[--j],kind:'match'});}
+      else if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]&&dp[i][j]===dp[i-2][j-2]+1){
+        columns.push({correct:correct[i-1],input:typed[j-1],kind:'wrong'},{correct:correct[i-2],input:typed[j-2],kind:'wrong'});i-=2;j-=2;
+      }else if(i&&j&&dp[i][j]===dp[i-1][j-1]+1){columns.push({correct:correct[--i],input:typed[--j],kind:'wrong'});}
+      else if(i&&dp[i][j]===dp[i-1][j]+1){columns.push({correct:correct[--i],input:'',kind:'missing'});}
+      else{columns.push({correct:'',input:typed[--j],kind:'extra'});}
+    }
+    columns.reverse();
+    const glyph=c=>c===' '?'␣':esc(c);
+    const cells=(side)=>columns.map(c=>`<span class="diff-letter ${c.kind}"${c[side]?'':` aria-label="${side==='input'?'漏写字母 '+esc(c.correct):'多写字母的位置'}"`}>${c[side]?glyph(c[side]):side==='input'?'□':'·'}</span>`).join('');
+    return `<div class="spelling-comparison" aria-label="正确答案与${esc(label)}逐字对照"><div class="comparison-label">正确答案</div><div class="spelling-diff-scroll"><div class="spelling-diff-table" style="--diff-columns:${columns.length}"><div class="word-title diff-row correct-row" lang="en" aria-label="正确答案 ${esc(expected)}">${cells('correct')}</div><div class="comparison-label input-label">${esc(label)}</div><div class="diff-row input-row" lang="en" aria-label="${esc(label)} ${answer?esc(answer):'未输入'}">${cells('input')}</div></div></div>${answer?'':'<p class="comparison-note">未输入单词，□ 表示漏写的字母。</p>'}<div class="diff-legend"><span class="legend-correct">绿色：正确字母</span><span class="legend-wrong">红色：错写／漏写 □</span><span class="legend-extra">橙色：多写</span></div></div>`;
+  }
+  function wordHeading(w,comparison=''){
     const pronunciation=pronunciations[w.id];
     const audioRow=(accent,label)=>`<div class="pronunciation-row"><span class="accent-label">${label}</span><span class="ipa" lang="en">${esc(pronunciation?.[accent]||'暂未收录')}</span><button class="pronunciation-button" data-action="speak" data-id="${esc(w.id)}" data-accent="${accent}" data-speed="normal" aria-label="播放${label}${esc(w.word)}发音">▶ <span>发音</span></button><button class="pronunciation-button slow" data-action="speak" data-id="${esc(w.id)}" data-accent="${accent}" data-speed="slow" aria-label="慢速播放${label}${esc(w.word)}发音">慢速</button></div>`;
-    return `<div class="word-title">${esc(w.word)}</div><div class="word-pos">${w.pos}</div><div class="pronunciation-block">${audioRow('uk','英式')}${audioRow('us','美式')}</div>${pronunciation?.speechText?'<div class="pronunciation-note">按当前词性读音；多读音词会结合简短语境朗读。</div>':''}`;
+    return `${comparison||`<div class="word-title">${esc(w.word)}</div>`}<div class="word-pos">${w.pos}</div><div class="pronunciation-block">${audioRow('uk','英式')}${audioRow('us','美式')}</div>${pronunciation?.speechText?'<div class="pronunciation-note">按当前词性读音；多读音词会结合简短语境朗读。</div>':''}`;
   }
   function renderSession(){
     stopAudio();
@@ -88,7 +114,8 @@
       const firstWrong=s.firstCorrect===false, recognitionLabel={known:'认识',unsure:'不确定',unknown:'不认识'}[s.recognition];
       const assessment={recognition:s.recognition,spellingCorrect:s.firstCorrect};
       const next=C.assessAndRate(state,w.id,assessment),left=C.remaining(next.words[w.id]);
-      card=`<div class="result-banner ${s.correct?'correct':'incorrect'}">${s.correct?'✓ 拼写正确':s.answer?'拼写需要再练':'还不会拼写'}<span>认词判断：${recognitionLabel}${s.retried?' · 首轮'+(firstWrong?'未拼对':'拼写正确'):''}</span></div>`+wordHeading(w)+answerMarkup(w)+(!s.correct?`<div class="spell-feedback">${s.answer?'你的输入：'+esc(s.answer):'下次先回忆，再试着写出来。'}</div>`:'');
+      const comparison=spellingComparison(w.word,s.answer)+(s.retried&&firstWrong?`<details class="first-spelling-attempt"><summary>查看首轮输入与正确答案</summary>${spellingComparison(w.word,s.firstAnswer,'首轮输入')}</details>`:'');
+      card=`<div class="result-banner ${s.correct?'correct':'incorrect'}">${s.correct?'✓ 拼写正确':s.answer?'拼写需要再练':'还不会拼写'}<span>认词判断：${recognitionLabel}${s.retried?' · 首轮'+(firstWrong?'未拼对':'拼写正确'):''}</span></div>`+wordHeading(w,comparison)+answerMarkup(w);
       actions=`<div class="result-actions">${!s.correct?'<button class="button secondary" data-action="retry-spelling">再练一次拼写</button>':''}<button class="button primary" data-action="complete-word">保存并继续 ↵</button></div><p class="review-plan">${left?`本轮还需连续通过 ${left} 次。隔几个词再次出现，认词与首轮拼写都通过才计入。`:'本轮检测通过，历史问题仍保留，可随时再练。'}${firstWrong?' 刚看答案后的改正不算独立通过。':''}</p>`;
       hint='按 Enter 保存当前词并继续。需要修改判断时，可撤销上一个词';
     }
