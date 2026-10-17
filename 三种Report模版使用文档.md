@@ -12,7 +12,7 @@
 2. 把对象说具体。 Research Mindset 的对象是“研究心态”；An Ideal University 的对象是“理想大学”。先用中文补完“我要介绍的是……”，避免写成自己的经历或呼吁。
 3. 写一句中心问题。 “它有什么特征？”→ 描述型；“这些成员分成哪几类？”→ 分类型；“这个整体由什么构成？”→ 组成型。
 4. 列出 A / B / C。 描述型填三个并列特征；分类型先定一个标准，再列同一大类中的类别；组成型填同一整体的三个部分。两点足够展开时也可以只写两点。
-5. 给每点补解释和例子。 每点写“是什么 → 具体怎样 → 例如谁做什么”。最好先列英文短语，再写完整句；没有可信数字时，写合理的说明性例子。
+5. 给每点补解释和例子。 每点都要具体展开，但不必每段重复同一流程。给A一个典型例子；B写行为细节或真实对照；C写情境、边界或与整体的联系。没有可信数字时，写合理的说明性例子。
 6. 套框架，按字数增删。 开头定义与列点，主体依序展开，结尾回扣。最后检查类型、逻辑、拼写、语法与词数。
 
 > 20分钟练习分配： 读题与确定类型2分钟 → 列提纲3分钟 → 写正文12分钟 → 检查3分钟。这是练习建议；正式考试以实际题面为准。
@@ -37,26 +37,25 @@ An Ideal University： 题目只给这个标题时，描述型通常最容易写
 
 
 
-## 3. 一套共用框架：只换决定题型的槽位
+## 3. 共用逻辑，主体三段各有写法
 
-> 定义 → 列点 → A解释例子 → B解释例子 → C解释例子 → 回扣
+> 定义与列点 → A建立特征或功能 → B具体展开与对照或衔接 → C补充并联系整体 → 回扣
 
-建议先背六类句子的作用和短语，再背自己填好的范文。三种模版共用 is / are、The first / second / third、which、This involves、For example、Overall；关键差异集中在“特征 / 类别 / 部分”和第二句。
+三种题型共用逻辑与一部分表达；同一篇的主体三段分别变化主语、句型和展开路径。先背各段的功能，再背可替换的短语。逻辑关系仍须真实，不能为了变化制造比较或因果。
 
-通常12句、五段： 开头2句 + 三个主体段各3句 + 结尾1句。小短文也可把主体合为一段；段数是练习安排，不是老师规定。若选两点，就删掉整组第三点并同步修改开头与结尾。
+示范排版： 开头 + 三个不同展开方式的主体段 + 收尾。示范为12句；实际每段2—4句即可，不必机械凑句。小短文也可把主体合为一段；段数是练习安排，不是老师规定。若选两点，就删掉整组第三点并同步修改开头与结尾。
 
 
 
-### 共用句子的功能
+### 可共用的逻辑与表达
 
 | 句号 | 功能 | 共用句式 | 使用说明 |
 | --- | --- | --- | --- |
-| 01 | 定义对象 | [Topic] is a [general category] that [defining feature or purpose]. | 先交代对象属于什么大类，再给出定义性特征或用途。单数用 is / a，复数改用 are，不能每个题都照搬 a。 |
-| 02 | 列出全文路线 | 按题型选择：特征 / 分类标准与类别 / 整体与组成部分。 | 这是决定题型的一句；下面三段的顺序必须与这里一致。 |
-| 03 / 06 / 09 | 点出 A、B、C | The first / second / third [characteristic / category / component] is [A / B / C], which [specific information]. | 三个主体段共用起句。which 后必须补完整谓语；组成型填作用，分类型填区分特征。 |
-| 04 / 07 / 10 | 具体解释 | This involves [a noun phrase or an -ing phrase]. | involves 后填名词或动名词，如 checking reliable sources。不要写 involves to check，也不要填孤立的完整句。 |
-| 05 / 08 / 11 | 例子与作用 | For example, [a complete sentence about a specific case]. | 写谁做什么、在哪里或用什么，尽量带出结果。不要只写 For example, curiosity.；分类例子必须属于该类。 |
-| 12 | 回扣全文 | Overall, these [characteristics / categories / components] [a precise summary]. | 描述型总结特征，分类型总结分类区别，组成型总结协作功能。结尾不增加第四个新点。 |
+| 开头 | 定义并预告范围 | [Topic] is a [general category] that [purpose or defining feature]. | 三种题型可以共用定义逻辑；第二句按特征、分类标准与类别、整体与部分调整。 |
+| 主体A | 用直接主题句建立第一点 | [A] is characterized by [specific feature]. / [A] performs [function]. | 直接点出对象与具体信息，再用恰当例子展开。不必每段用 The first… 起句。 |
+| 主体B | 换主语与句型，说明表现或区别 | [A noun phrase linked to B] [a precise verb] [specific information]. | 描述型具体说明第二个特征；分类型按同一标准对照第二类；组成型说明第二部分接续第一部分做什么。 |
+| 主体C | 补第三点并连接整体 | [C] [a precise verb] [specific information]. / Through [a relevant process], [subject] [outcome]. | 新增信息之后说明整体联系，不能只重复A、B的句式。没有真实因果时写联系或区别，不硬写结果。 |
+| 收尾 | 概括已展开的信息 | Together, [previous points] [a specific synthesis]. | 总结各点之间的联系、分类界限或协作功能；不再增加新点。 |
 
 
 
@@ -66,7 +65,7 @@ An Ideal University： 题目只给这个标题时，描述型通常最容易写
 
 Classification → Description → Recap / Extension
 
-这里的 Classification 是把对象放进一个大类，例如 mindset → an approach to inquiry；不是把对象拆成若干类别。随后按三个方面描述它。
+先把对象定义为一个大类，再描述并列特征。三个主体段内容平行，但句式与展开路径有变化；具体对象适合介绍外观、环境或状态时，就描述这些事实，不强行写“好处”。
 
 
 
@@ -74,15 +73,15 @@ Classification → Description → Recap / Extension
 
 ```text
 
-[Topic] is a [general category] that [defining feature or purpose]. It is characterized by [A], [B], and [C].
+[Topic] is a [general category] that [defining feature or purpose]. Its main characteristics include [A], [B], and [C].
 
-The first characteristic is [A], which [specific description]. This involves [a concrete action or process]. For example, [a specific case and its effect].
+[A] is reflected in [an observable feature or behaviour]. For example, [a specific subject] [a concrete action or observation]. This [specific aspect of the example] [what it illustrates about A].
 
-The second characteristic is [B], which [specific description]. This involves [a concrete action or process]. For example, [a specific case and its effect].
+Another distinctive feature is [B], expressed through [a specific manifestation]. [A subject linked to B] [a precise verb] [a concrete explanation]. By [a relevant action], [the same actor] [a result or observable effect].
 
-The third characteristic is [C], which [specific description]. This involves [a concrete action or process]. For example, [a specific case and its effect].
+[C] is also evident in [a specific situation or quality]. When [a relevant situation occurs], [a clear subject] [an observable response]. This [named response or quality] complements [A or B] by [explaining a meaningful connection].
 
-Overall, these characteristics [explain the object's defining qualities or contribution].
+Together, these characteristics [summarize what defines the topic].
 
 ```
 
@@ -90,15 +89,25 @@ Overall, these characteristics [explain the object's defining qualities or contr
 
 ### 填空示范
 
-- Topic / general category：a research mindset / an approach to inquiry：先把研究心态定义成一种探究方式。
+- Topic / general category：a research mindset / an approach to inquiry：定义整体概念，随后写它的特征。
 
-- A / B / C：curiosity / critical thinking / persistence：三个并列特征：好奇心、批判性思维、坚持。
+- A / B / C：curiosity / critical thinking / persistence：三者均为研究心态的品质；逻辑平行不等于句子重复。
 
-- specific description：encourages researchers to ask meaningful questions：说明特征如何表现，不只写 important。
+- A段：可观察表现：questions that emerge from everyday observations：先说好奇心怎样表现，再举追问反馈差异的例子。
 
-- action or process：examining everyday problems from different perspectives：用可观察的行为解释好奇心。
+- B段：具体主语与动词：researchers compare sources and examine alternative explanations：直接主语+动作，不再重复This involves。
 
-- example and effect：a student explores why classmates respond differently to feedback：具体例子要能看出“好奇心”，不能突然谈校园设施。
+- C段：情境与联系：when an experiment fails / revise the method：坚持在失败时怎样表现？怎样和好奇心、判断结合？
+
+
+
+### 主体三段为什么不同
+
+- 主体A：特征 → 例子 → 解释例子：建立一个清楚特征，用具体行为说明，再点出例子表现了什么。 常用句式：[A] is reflected in… / For example, [subject] [verb]… / This [specific action]…
+
+- 主体B：特征 → 行为细节 → 作用：用名词组或直接主语换句型，说明怎样实现；By句的主语必须能执行前面的动作。 常用句式：Another distinctive feature is… / [Subject] compares / evaluates… / By [doing], [actor]…
+
+- 主体C：特征 → 情境表现 → 与前文联系：给一个具体情境，说明第三种特征怎样出现，连接其他品质而非重复空泛结论。 常用句式：[C] is evident in… / When [situation], [subject]… / This [response] complements…
 
 
 
@@ -107,59 +116,59 @@ Overall, these characteristics [explain the object's defining qualities or contr
 | 句号 | 英文框架 | 功能 |
 | --- | --- | --- |
 | 1 | [Topic] is a [general category] that [defining feature or purpose]. | 定义对象 |
-| 2 | It is characterized by [A], [B], and [C]. | 列特征 / 类别 / 部分 |
-| 3 | The first characteristic is [A], which [specific description]. | 点出 A 并说明特点或功能 |
-| 4 | This involves [a concrete action or process]. | 解释 A 的具体行为 |
-| 5 | For example, [a specific case and its effect]. | 举例说明 A |
-| 6 | The second characteristic is [B], which [specific description]. | 点出 B 并说明特点或功能 |
-| 7 | This involves [a concrete action or process]. | 解释 B 的具体行为 |
-| 8 | For example, [a specific case and its effect]. | 举例说明 B |
-| 9 | The third characteristic is [C], which [specific description]. | 点出 C 并说明特点或功能 |
-| 10 | This involves [a concrete action or process]. | 解释 C 的具体行为 |
-| 11 | For example, [a specific case and its effect]. | 举例说明 C |
-| 12 | Overall, these characteristics [explain the object's defining qualities or contribution]. | 概括全文 |
+| 2 | Its main characteristics include [A], [B], and [C]. | 预告三个特征 |
+| 3 | [A] is reflected in [an observable feature or behaviour]. | 点出A的可观察表现 |
+| 4 | For example, [a specific subject] [a concrete action or observation]. | 用完整句举例 |
+| 5 | This [specific aspect of the example] [what it illustrates about A]. | 解释例子体现的特征 |
+| 6 | Another distinctive feature is [B], expressed through [a specific manifestation]. | 换句式介绍B |
+| 7 | [A subject linked to B] [a precise verb] [a concrete explanation]. | 用具体主语与动词展开B |
+| 8 | By [a relevant action], [the same actor] [a result or observable effect]. | 说明行为的作用或结果 |
+| 9 | [C] is also evident in [a specific situation or quality]. | 用直接主题句引出C |
+| 10 | When [a relevant situation occurs], [a clear subject] [an observable response]. | 描述情境与反应 |
+| 11 | This [named response or quality] complements [A or B] by [explaining a meaningful connection]. | 解释C与前两点的联系 |
+| 12 | Together, these characteristics [summarize what defines the topic]. | 综合全文 |
 
 
 
-### 完整范文：Research Mindset（正文 165 词）
+### 完整范文：Research Mindset（正文 166 词）
 
-A research mindset is an approach to inquiry that guides the investigation of questions through evidence and careful reasoning. It is characterized by curiosity, critical thinking, and persistence.
+A research mindset is an approach to inquiry that connects meaningful questions with evidence and careful reasoning. Its main characteristics include curiosity, critical thinking, and persistence.
 
-The first characteristic is curiosity, which encourages researchers to ask meaningful questions. This involves examining everyday problems from different perspectives. For example, a student explores why classmates respond differently to feedback instead of accepting an easy explanation.
+Curiosity is reflected in questions that emerge from everyday observations. For example, a student investigates why classmates respond differently to the same feedback. This attention to variation turns a familiar experience into a question worth investigating.
 
-The second characteristic is critical thinking, which supports the evaluation of information. This involves checking sources and considering alternative explanations. For example, a researcher compares findings from several studies before deciding whether a claim is reliable.
+Another distinctive feature is critical thinking, expressed through careful evaluation of information. Researchers compare sources and examine alternative explanations rather than treating every claim as equally reliable. By checking how evidence supports a conclusion, they distinguish sound reasoning from unsupported assumptions.
 
-The third characteristic is persistence, which sustains effort when progress is slow. This involves reviewing methods and learning from unsuccessful attempts. For example, a student revises an experiment after identifying a weakness in the original procedure.
+Persistence is also evident in researchers' responses to setbacks. When an experiment produces unclear results, they review the procedure and revise the method. This willingness to reconsider an approach complements curiosity and critical thinking by keeping inquiry active without ignoring weaknesses.
 
-Overall, these characteristics support systematic inquiry and more reliable conclusions. Their value lies in the combination of thoughtful questions, careful judgment, and sustained effort throughout the research process.
+Together, these characteristics define a thoughtful and systematic approach to research, linking the generation of questions with responsible judgment and sustained investigation.
 
 
 
 ### 中文理解
 
-研究心态是一种探究方式，通过证据和谨慎推理引导对问题的调查。它的特征包括好奇心、批判性思维和坚持。
+研究心态是一种探究方式，将有意义的问题与证据和谨慎推理联系起来。其主要特征包括好奇心、批判性思维和坚持。
 
-第一个特征是好奇心，它鼓励研究者提出有意义的问题。这包括从不同角度审视日常问题。例如，一名学生探究为什么同学对反馈有不同反应，而不是接受简单的解释。
+好奇心体现在日常观察产生的问题中。例如，一名学生调查为什么同学对相同反馈有不同反应。对差异的关注把熟悉经历变成值得调查的问题。
 
-第二个特征是批判性思维，它支持对信息的评估。这包括核查来源并考虑其他解释。例如，研究者比较多项研究的发现，再判断一项说法是否可靠。
+另一个显著特征是批判性思维，表现为认真评估信息。研究者比较来源、审视其他解释，而不是认为所有说法同样可靠。通过检查证据如何支持结论，他们区分合理推理与缺乏支持的假设。
 
-第三个特征是坚持，它使人们在进展缓慢时继续努力。这包括反思方法并从失败尝试中学习。例如，学生发现原先程序的缺点后修改实验。
+坚持也体现在研究者对挫折的回应中。实验结果不清楚时，他们检查程序并修改方法。这种重新考虑方法的意愿与好奇心、批判性思维相互配合，让探究继续，同时不忽视缺点。
 
-总体而言，这些特征支持系统探究与更可靠的结论。它们的价值体现在研究过程中有深度的问题、谨慎判断和持续努力的结合。
+这些特征共同界定了审慎而系统的研究方式，把问题生成与负责任的判断和持续调查联系起来。
 
 
 
 ### 段落作用
 
-1. 定义研究心态，再预告三个特征。
+1. 定义→预告三个品质。
 
-2. 好奇心 → 换角度观察问题 → 探究同学对反馈的不同反应。
+2. 好奇心：可观察表现→同学反馈的例子→解释为什么例子体现好奇心。
 
-3. 批判性思维 → 核查资料 → 比较多项研究。
+3. 批判性思维：名词组介绍特征→具体比较行为→By说明判断过程。
 
-4. 坚持 → 反思方法 → 修改实验。
+4. 坚持：挫折情境→方法调整→和前两种品质的联系。
 
-5. 回扣探究与结论质量，最后一句是可删的扩展。
+5. 综合三个品质，不把上文再抄一遍。
 
 
 
@@ -169,7 +178,7 @@ Overall, these characteristics support systematic inquiry and more reliable conc
 
 Classification system → Types / Subtypes
 
-先写分类标准，再按同一标准介绍各类。Types / Subtypes 是主体；结尾的概括可选，老师的啤酒示例并没有单独的总结段。为方便背诵，这里附一个可删结尾。
+先写一个分类标准，再写各类。主体A完整介绍第一类，主体B沿同一标准对照第二类，主体C说明第三类的边界与典型表现。若类型不适合对照，直接写区别特征；结尾可按字数删去。
 
 
 
@@ -177,15 +186,15 @@ Classification system → Types / Subtypes
 
 ```text
 
-[Plural topic] are [a plural general category] that [shared purpose or feature]. Based on [one classification criterion], they fall into three categories: [A], [B], and [C].
+[Plural topic] are [a plural general category] that [shared feature or purpose]. Based on [one classification criterion], they fall into [A], [B], and [C].
 
-The first category is [A], which is characterized by [its distinguishing feature]. This involves [the process or activity typical of this category]. For example, [a specific member or case of this category].
+[A] is characterized by [a distinguishing feature]. [Typical members of A] [a specific activity or property]. A typical example is [a member or case that clearly belongs to A].
 
-The second category is [B], which is characterized by [its distinguishing feature]. This involves [the process or activity typical of this category]. For example, [a specific member or case of this category].
+Unlike [A], [B] [a difference under the same criterion]. This [named difference] involves [a specific property or process]. In [a representative case of B], [a complete description].
 
-The third category is [C], which is characterized by [its distinguishing feature]. This involves [the process or activity typical of this category]. For example, [a specific member or case of this category].
+[C] combines [relevant features] / is distinguished by [its own feature]. [Its members] [a specific activity or property]. The defining distinction is [a boundary separating C from A and B].
 
-Overall, these categories differ in [the stated criterion], while sharing [a common purpose or feature].
+These categories differ in [the stated criterion], while sharing [a common feature or purpose].
 
 ```
 
@@ -193,15 +202,25 @@ Overall, these categories differ in [the stated criterion], while sharing [a com
 
 ### 填空示范
 
-- plural topic / general category：university teaching formats / arrangements for instruction：分类对象是教学形式，不是大学的各个部门。
+- plural topic / general category：university teaching formats / arrangements for instruction：写的是教学形式的种类。
 
-- classification criterion：the delivery channel：只按授课渠道这一标准分类。
+- classification criterion：the delivery channel：三段都以授课渠道区别类别，不换标准。
 
-- A / B / C：face-to-face teaching / online teaching / blended teaching：纯线下、纯线上、线上线下结合，类别在本框架里有清楚边界。
+- A / B / C：face-to-face / online / blended teaching：各类定义清楚：完全到校、完全线上、计划结合两者。
 
-- distinguishing feature：interaction in a shared physical space：写能把此类与另外两类区分开的特征。
+- B段：同标准对照：online teaching delivers instruction entirely through digital platforms：与A对照的是授课渠道，不突然改比质量。
 
-- member or case：a laboratory class on campus：用具体课程举例；laboratory 是例子，不要突然把它当第四类。
+- C段：边界：planned use of both settings within the same course：结合课堂与线上是混合教学的定义边界；第三类不一定是前两类的混合。
+
+
+
+### 主体三段为什么不同
+
+- 主体A：类别定义 → 特征 → 典型成员：先建立第一类，为后面的区别提供参照。 常用句式：[A] is characterized by… / [Members] [verb]… / A typical example is…
+
+- 主体B：同标准对照 → 解释 → 具体情境：在相同分类标准下对照第二类，用明确名词接住“区别”。 常用句式：Unlike [A], [B]… / This [difference] involves… / In [case], [subject]…
+
+- 主体C：独有特征 → 表现 → 类别边界：介绍第三类并说明边界。只有本来是混合类时才用combines。 常用句式：[C] is distinguished by / combines… / [Members] [verb]… / The defining distinction is…
 
 
 
@@ -209,60 +228,60 @@ Overall, these categories differ in [the stated criterion], while sharing [a com
 
 | 句号 | 英文框架 | 功能 |
 | --- | --- | --- |
-| 1 | [Plural topic] are [a plural general category] that [shared purpose or feature]. | 定义对象 |
-| 2 | Based on [one classification criterion], they fall into three categories: [A], [B], and [C]. | 列特征 / 类别 / 部分 |
-| 3 | The first category is [A], which is characterized by [its distinguishing feature]. | 点出 A 并说明特点或功能 |
-| 4 | This involves [the process or activity typical of this category]. | 解释 A 的具体行为 |
-| 5 | For example, [a specific member or case of this category]. | 举例说明 A |
-| 6 | The second category is [B], which is characterized by [its distinguishing feature]. | 点出 B 并说明特点或功能 |
-| 7 | This involves [the process or activity typical of this category]. | 解释 B 的具体行为 |
-| 8 | For example, [a specific member or case of this category]. | 举例说明 B |
-| 9 | The third category is [C], which is characterized by [its distinguishing feature]. | 点出 C 并说明特点或功能 |
-| 10 | This involves [the process or activity typical of this category]. | 解释 C 的具体行为 |
-| 11 | For example, [a specific member or case of this category]. | 举例说明 C |
-| 12 | Overall, these categories differ in [the stated criterion], while sharing [a common purpose or feature]. | 概括全文 |
+| 1 | [Plural topic] are [a plural general category] that [shared feature or purpose]. | 定义共同大类 |
+| 2 | Based on [one classification criterion], they fall into [A], [B], and [C]. | 写标准并列出三类 |
+| 3 | [A] is characterized by [a distinguishing feature]. | 定义A的区分特征 |
+| 4 | [Typical members of A] [a specific activity or property]. | 具体描述A |
+| 5 | A typical example is [a member or case that clearly belongs to A]. | 给A的典型成员 |
+| 6 | Unlike [A], [B] [a difference under the same criterion]. | 与A按同标准对照B |
+| 7 | This [named difference] involves [a specific property or process]. | 展开该区别 |
+| 8 | In [a representative case of B], [a complete description]. | 用B的具体情境说明 |
+| 9 | [C] combines [relevant features] / is distinguished by [its own feature]. | 定义C的独有特征 |
+| 10 | [Its members] [a specific activity or property]. | 具体描述C |
+| 11 | The defining distinction is [a boundary separating C from A and B]. | 说明C的分类边界 |
+| 12 | These categories differ in [the stated criterion], while sharing [a common feature or purpose]. | 概括分类标准与共同目的 |
 
 
 
-### 完整范文：University Teaching Formats（正文 166 词）
+### 完整范文：University Teaching Formats（正文 169 词）
 
-University teaching formats are arrangements for instruction that support learning in different environments. Based on the delivery channel, they fall into three categories: face-to-face teaching, online teaching, and blended teaching.
+University teaching formats are arrangements for instruction that support learning in different settings. Based on the delivery channel, they fall into face-to-face teaching, online teaching, and blended teaching.
 
-The first category is face-to-face teaching, which is characterized by interaction in a shared physical space. This involves attending classes on campus and communicating directly with teachers. For example, students complete a laboratory activity together in a university classroom.
+Face-to-face teaching is characterized by instruction in a shared physical space. Teachers and students meet on campus for explanations, discussion, and practical activities. A typical example is a laboratory class in which students handle equipment under direct supervision.
 
-The second category is online teaching, which is characterized by instruction delivered entirely through digital platforms. This involves accessing materials and discussing questions remotely. For example, students attend a live lecture from home and submit exercises through a learning platform.
+Unlike face-to-face teaching, online teaching delivers instruction entirely through digital platforms. This remote arrangement involves accessing materials and communicating without classroom attendance. In a live online seminar, students discuss a question from different locations and submit their work electronically.
 
-The third category is blended teaching, which is characterized by a planned combination of classroom and online instruction. This involves completing some activities on campus and others digitally. For example, students watch a recorded explanation before discussing its application in class.
+Blended teaching combines classroom interaction with planned online activities. Students move between the two settings as part of a coordinated course design. The defining distinction is the planned use of both channels within the same course, such as watching an online explanation before discussing its application on campus.
 
-Overall, these categories differ in their delivery channels, while sharing the purpose of supporting organized learning.
+These categories differ in their delivery channels, while sharing the purpose of organizing teaching and learning.
 
 
 
 ### 中文理解
 
-大学教学形式是在不同环境中支持学习的授课安排。按授课渠道，它们分为三类：线下教学、线上教学和混合教学。
+大学教学形式是在不同场景中支持学习的授课安排。按授课渠道，分为线下教学、线上教学和混合教学。
 
-第一类是线下教学，其区别特征是在共同的物理空间互动。这包括到校上课并与教师直接交流。例如，学生在大学教室里一起完成实验活动。
+线下教学以共同物理空间内的授课为特征。师生在校园见面，开展讲解、讨论与实践活动。典型例子是学生在直接监督下使用设备的实验课。
 
-第二类是线上教学，其区别特征是完全通过数字平台授课。这包括远程获取材料和讨论问题。例如，学生在家听直播讲座并通过学习平台提交练习。
+与线下教学不同，线上教学完全通过数字平台授课。远程安排包括无需到教室就能获取材料和交流。在直播线上研讨课中，学生从不同地点讨论问题并以电子方式提交作业。
 
-第三类是混合教学，其区别特征是有计划地结合课堂和线上授课。这包括在校园完成部分活动，并在线上完成其他活动。例如，学生先观看录制的讲解，再在课堂讨论它的应用。
+混合教学将课堂互动与计划中的线上活动结合。学生在统一课程设计中往返于两个环境。其定义上的区别是同一课程有计划地使用两种渠道，例如先看线上讲解，再到校园讨论应用。
 
-总体而言，这些类别的授课渠道不同，但都旨在支持有组织的学习。
+这些类别的授课渠道不同，但都服务于教学与学习的组织。
 
 
 
 ### 段落作用
 
-1. 共同定义 → 明确按授课渠道分类 → 列三类。
+1. 共同定义→单一标准→三类。
 
-2. 线下：共同物理空间 → 到校上课 → 校内实验课。
+2. 第一类：先定义空间→活动特征→实验课这一具体成员。
 
-3. 线上：完全线上授课 → 远程访问与讨论 → 在家听直播课。
+3. 第二类：与线下按渠道对照→远程安排→线上研讨课。
 
-4. 混合：有计划地结合两个渠道 → 部分到校、部分线上 → 课前视频与课内讨论。
+4. 第三类：结合渠道→课程安排→明确与前两类的边界。
 
-5. 概括相同分类标准与共同目的；可按字数要求删除。
+5. 按原标准概括，不比较没有依据的好坏。
 
 
 
@@ -272,7 +291,7 @@ Overall, these categories differ in their delivery channels, while sharing the p
 
 Classification of entity → Components → Definition / Recap of major components
 
-把整个对象放进一个大类，再说明组成部分及其作用。可以按 component–activity（部分与活动）或 structure–function（结构与功能）展开；角色、环节也可以构成整体。
+定义整体并列出部分。主体A介绍一个部分与活动，主体B介绍另一个部分并解释如何衔接，主体C写第三部分的功能与对整体的贡献。本文按协调、研究、审核这一职能层面划分；若整体不是流程，写结构或相互依赖关系，不硬写先后顺序。
 
 
 
@@ -280,15 +299,15 @@ Classification of entity → Components → Definition / Recap of major componen
 
 ```text
 
-[Topic] is a [general category] that [overall purpose]. It consists of three main components: [A], [B], and [C].
+[Topic] is a [general category] that [overall purpose]. It consists of [A], [B], and [C].
 
-The first component is [A], which is responsible for [its function]. This involves [a concrete task or activity]. For example, [a specific way this component contributes to the whole].
+[A] is responsible for [its main function]. Its activities include [two specific tasks in parallel form]. For instance, [an actor or part] [a concrete contribution].
 
-The second component is [B], which is responsible for [its function]. This involves [a concrete task or activity]. For example, [a specific way this component contributes to the whole].
+[B] provides [a resource or function needed by the whole]. [Specific actors or structures] [a precise activity]. This [named output or activity] connects with [A or C] through [a genuine relationship].
 
-The third component is [C], which is responsible for [its function]. This involves [a concrete task or activity]. For example, [a specific way this component contributes to the whole].
+The role of [C] is to [its specific function]. Through [a process performed by C], [C or its actor] [a concrete action or result]. [This output / These checks] [how C contributes to the whole or another part].
 
-Overall, these components work together to [the function or outcome of the whole].
+The interaction of these components [summarizes the overall function].
 
 ```
 
@@ -296,15 +315,25 @@ Overall, these components work together to [the function or outcome of the whole
 
 ### 填空示范
 
-- Topic / general category：an ideal project group / a collaborative team：先定义整体：理想项目组是一支合作团队。
+- Topic / general category：an ideal project group / a collaborative team：定义整体，按职能拆部分。
 
-- A / B / C：coordination / research / review：在“职能”这一层面拆三部分，避免角色、设备、品质混在同一层。
+- A / B / C：coordination / research / review：三点均为同一团队的职能，不是三类团队。
 
-- function：organizing tasks and maintaining communication：交代该职能对整体的作用。
+- A段：任务与例子：setting priorities and monitoring deadlines：include后用平行动名词；随后用制定时间表的例子。
 
-- task or activity：setting priorities and monitoring progress：功能之后再写具体动作，不重复两遍同一句。
+- B段：输出与衔接：a research record / material for the review stage：研究输出怎样被审核使用？写真实连接。
 
-- contribution to the whole：a coordinator prepares a schedule with deadlines for each stage：说明部分怎样帮助完成项目；同一人也可承担多个职能。
+- C段：动作与贡献：reviewers check evidence and organization：Through结构的主语reviewers执行checking；最后写对整体质量的具体贡献。
+
+
+
+### 主体三段为什么不同
+
+- 主体A：功能 → 任务 → 具体贡献：先说明一个部分负责什么，再写具体活动。 常用句式：[A] is responsible for… / Its activities include… / For instance, [actor]…
+
+- 主体B：资源或功能 → 行为 → 部分间衔接：换成主动动词，并解释这一部分的输出怎样连接其他部分。 常用句式：[B] provides… / [Actors] select / record… / This [output] connects with…
+
+- 主体C：作用 → 实现方式 → 整体贡献：强调功能如何实现，用具体产出回到整体。 常用句式：The role of [C] is to… / Through [process], [actor]… / These [outputs]…
 
 
 
@@ -312,60 +341,60 @@ Overall, these components work together to [the function or outcome of the whole
 
 | 句号 | 英文框架 | 功能 |
 | --- | --- | --- |
-| 1 | [Topic] is a [general category] that [overall purpose]. | 定义对象 |
-| 2 | It consists of three main components: [A], [B], and [C]. | 列特征 / 类别 / 部分 |
-| 3 | The first component is [A], which is responsible for [its function]. | 点出 A 并说明特点或功能 |
-| 4 | This involves [a concrete task or activity]. | 解释 A 的具体行为 |
-| 5 | For example, [a specific way this component contributes to the whole]. | 举例说明 A |
-| 6 | The second component is [B], which is responsible for [its function]. | 点出 B 并说明特点或功能 |
-| 7 | This involves [a concrete task or activity]. | 解释 B 的具体行为 |
-| 8 | For example, [a specific way this component contributes to the whole]. | 举例说明 B |
-| 9 | The third component is [C], which is responsible for [its function]. | 点出 C 并说明特点或功能 |
-| 10 | This involves [a concrete task or activity]. | 解释 C 的具体行为 |
-| 11 | For example, [a specific way this component contributes to the whole]. | 举例说明 C |
-| 12 | Overall, these components work together to [the function or outcome of the whole]. | 概括全文 |
+| 1 | [Topic] is a [general category] that [overall purpose]. | 定义整体 |
+| 2 | It consists of [A], [B], and [C]. | 列出同层面的部分 |
+| 3 | [A] is responsible for [its main function]. | 说明A的主要功能 |
+| 4 | Its activities include [two specific tasks in parallel form]. | 展开具体任务 |
+| 5 | For instance, [an actor or part] [a concrete contribution]. | 举例说明A的贡献 |
+| 6 | [B] provides [a resource or function needed by the whole]. | 用主动动词说明B的功能 |
+| 7 | [Specific actors or structures] [a precise activity]. | 写明B的具体活动 |
+| 8 | This [named output or activity] connects with [A or C] through [a genuine relationship]. | 连接B的产出与另一部分 |
+| 9 | The role of [C] is to [its specific function]. | 用不定式说明C的作用 |
+| 10 | Through [a process performed by C], [C or its actor] [a concrete action or result]. | 说明实现功能的过程 |
+| 11 | [This output / These checks] [how C contributes to the whole or another part]. | 交代该活动对整体的贡献 |
+| 12 | The interaction of these components [summarizes the overall function]. | 总结各部分互动 |
 
 
 
-### 完整范文：An Ideal Project Group（正文 165 词）
+### 完整范文：An Ideal Project Group（正文 173 词）
 
-An ideal project group is a collaborative team that completes a shared task through coordinated effort. It consists of three main functional components: coordination, research, and review.
+An ideal project group is a collaborative team that completes a shared task through clearly connected responsibilities. It consists of three functional components: coordination, research, and review.
 
-The first component is coordination, which is responsible for organizing tasks and maintaining communication. This involves setting priorities and monitoring progress. For example, a coordinator prepares a schedule with clear deadlines for each stage of the project.
+Coordination is responsible for organizing the work and maintaining communication. Its activities include setting priorities and monitoring deadlines throughout the project. For instance, a coordinator prepares a schedule that identifies the tasks required at each stage and assigns them to group members.
 
-The second component is research, which is responsible for gathering and interpreting relevant information. This involves selecting reliable sources and recording useful findings. For example, group members compare several studies to establish a sound basis for their report.
+Research provides the evidence needed to develop the report. Group members select reliable sources, compare findings, and record information relevant to the project question. This research record supplies material for the review stage, connecting information collection with quality control.
 
-The third component is review, which is responsible for checking the quality of the final work. This involves identifying gaps and correcting unclear explanations. For example, a reviewer checks whether the evidence supports each conclusion before submission.
+The role of review is to examine the accuracy and coherence of the final product. Through checking the evidence and organization, reviewers identify unsupported claims and gaps in explanation. These checks guide revisions that bring individual contributions into a consistent report.
 
-Overall, these components work together to support efficient cooperation and a coherent final product. Clear responsibilities connect individual contributions with the common goal of the group.
+The interaction of these components supports coordinated progress from initial planning to submission, with each function contributing to a well-supported and clearly organized outcome.
 
 
 
 ### 中文理解
 
-理想项目组是一支通过协调合作完成共同任务的团队。它由三个主要职能部分构成：协调、研究和审核。
+理想项目组是一支通过清楚衔接的职责完成共同任务的合作团队。它包含协调、研究和审核三个职能部分。
 
-第一部分是协调，负责组织任务并保持沟通。这包括确定优先级和跟踪进度。例如，协调者为项目各阶段编制有明确截止时间的计划。
+协调负责组织工作和保持沟通。活动包括确定优先级和监督项目中的截止时间。例如，协调者编制时间表，明确各阶段所需任务并分配给成员。
 
-第二部分是研究，负责搜集和解读相关信息。这包括选择可靠来源并记录有用发现。例如，小组成员比较多项研究，为报告建立可靠依据。
+研究提供报告发展所需的证据。组员选择可靠来源、比较发现、记录与项目问题相关的信息。研究记录为审核阶段提供材料，把信息收集与质量控制连接起来。
 
-第三部分是审核，负责检查最终成果的质量。这包括发现缺漏并修改不清楚的解释。例如，审核者在提交前检查证据是否支持每一项结论。
+审核的作用是检查最终成果的准确性与连贯性。审核者通过检查证据和组织，发现缺乏支持的说法与解释缺漏。这些检查指导修改，把个人贡献整合成一致的报告。
 
-总体而言，这些部分协同工作，支持高效合作和连贯的最终成果。清楚的职责把个人贡献与小组的共同目标联系起来。
+各部分之间的互动支持从最初计划到提交的协调进展，每一职能都对有依据、组织清楚的成果作出贡献。
 
 
 
 ### 段落作用
 
-1. 定义项目组 → 按职能拆出协调、研究、审核。
+1. 定义团队→按职能列部分。
 
-2. 协调 → 组织与沟通 → 制定时间表。
+2. 协调：功能→并列任务→时间表例子。
 
-3. 研究 → 搜集与解读 → 比较研究资料。
+3. 研究：提供证据→具体行为→研究记录连接审核。
 
-4. 审核 → 质量检查 → 核对证据与结论。
+4. 审核：作用→检查动作→指导最终整合。
 
-5. 说明职能如何协作；最后一句是可删扩展。
+5. 概括各职能互动，回到完整项目。
 
 
 
@@ -395,7 +424,7 @@ This 的指向： This involves 必须承接刚解释的特征、类别活动或
 
 1. 先写齐主干： 定义、路线句、两到三个主体点。每点至少解释一个具体行为或功能。
 2. 不足150词： 先给最薄弱的一点加“行为 + 场景 + 结果”，如学生比较两项研究来判断结论是否可靠。再考虑补一处相关的对照或限制。
-3. 150—200词： 内容已经完整时，检查措辞与连贯，不再机械加句。12句平均每句约13—16词，通常能接近这个范围；必须实际数词。
+3. 150—200词： 内容已经完整时，检查措辞与连贯，不再机械加句。示范12句只是篇幅安排，实际可以增减；不要为了凑句数添加空话，必须实际数词。
 4. 超过200词： 先删可选扩展、重复解释和过长例子，再压缩形容词；保留定义、分类标准或组成关系和各点的具体信息。
 5. 题面要求更长： 每点加一条作用、对照或适用情境；下面的扩写句库用于补相关信息，不是每题全加。
 
@@ -456,13 +485,13 @@ there be 的具体替换： There are three components in the team → The team 
 
 ## 8. 老师的要求与交卷前检查
 
-内容依据第三课 Report_canvas.pdf 第3—7页的结构与语言特点，以及第9—10页、Report_tasks.docx 的练习要求整理。共用12句框架、五段安排、扩写句和范文是为复习设计的辅助材料。
+内容依据第三课 Report_canvas.pdf 第3—7页的结构与语言特点，以及第9—10页、Report_tasks.docx 的练习要求整理。主体三段不同写法、示范段落安排、扩写句和范文是为复习设计的辅助材料。
 
 - 结构： 描述型先分类定义再描述；分类型写清标准及各类；组成型写整体、部件与功能。开头列的点和主体一致。
 - 展开： 每点有具体解释，例子服务该点。没有虚构的调查、数据或研究结论。
 - 语态与时态： 一般定义和常见特征用一般现在时，描述一类事物；有具体历史背景时再按事实改变时态。
 - 语言： 课件要求避免 modal verbs（情态动词）。本模版主要用 is / involves / supports 等陈述句，少用 should / must / can 来建议或号召。
-- 3C： Clear 说具体，Concise 删重复，Coherent 让每句接住上一句。模板重复便于背诵，成稿可换一两个衔接词并让句子长短有变化。
+- 3C： Clear 说具体，Concise 删重复，Coherent 让每句接住上一句。同篇主体三段要改变主语、句型和展开方式；这种变化应服务内容，不能只替换First / Second。
 - 作业标注： 课堂任务要求标明 report 类型、阶段与句子作用；练习可参考逐句表标注。考试是否也标注，以题面为准。
 - 词数： 课程练习是20分钟、150—200词；正式考试以题面要求为准。检查冠词、主谓一致、拼写和标点。
 

@@ -138,3 +138,8 @@
 .spelling-comparison .input-row .missing{padding:0 1px}
 .spelling-comparison .correct-row{white-space:normal;overflow-wrap:anywhere}
 @media(max-width:760px){.spelling-comparison .diff-row{font-size:22px}}
+.body-strategies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:23px 0}
+.body-strategy{background:#f8f6fb;border:1px solid #e8e2ef;border-radius:8px;padding:17px}
+.body-strategy h4{font-size:13px;line-height:1.8;color:#76628f;margin:0 0 10px}
+.body-strategy p{font-size:12px;line-height:1.9}.body-strategy .body-patterns{font:14px/1.8 Georgia,serif;margin-top:12px;color:#867690}
+@media(max-width:760px){.body-strategies{grid-template-columns:1fr}.body-strategy{padding:16px}}
