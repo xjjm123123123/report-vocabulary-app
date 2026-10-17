@@ -83,7 +83,8 @@
     }
     columns.reverse();
     const glyph=c=>c===' '?'␣':esc(c);
-    const cells=(side)=>columns.map(c=>`<span class="diff-letter ${c.kind}"${c[side]?'':` aria-label="${side==='input'?'漏写字母 '+esc(c.correct):'多写字母的位置'}"`}>${c[side]?glyph(c[side]):side==='input'?'□':'·'}</span>`).join('');
+    // Never insert alignment placeholders into the spelling the learner is meant to remember.
+    const cells=(side)=>columns.filter(c=>side==='input'||c.correct).map(c=>`<span class="diff-letter ${c.kind}"${c[side]?'':` aria-label="漏写字母 ${esc(c.correct)}"`}>${c[side]?side==='correct'?esc(c[side]):glyph(c[side]):'□'}</span>`).join('');
     return `<div class="spelling-comparison" aria-label="正确答案与${esc(label)}逐字对照"><div class="comparison-label">正确答案</div><div class="spelling-diff-scroll"><div class="spelling-diff-table" style="--diff-columns:${columns.length}"><div class="word-title diff-row correct-row" lang="en" aria-label="正确答案 ${esc(expected)}">${cells('correct')}</div><div class="comparison-label input-label">${esc(label)}</div><div class="diff-row input-row" lang="en" aria-label="${esc(label)} ${answer?esc(answer):'未输入'}">${cells('input')}</div></div></div>${answer?'':'<p class="comparison-note">未输入单词，□ 表示漏写的字母。</p>'}<div class="diff-legend"><span class="legend-correct">绿色：正确字母</span><span class="legend-wrong">红色：错写／漏写 □</span><span class="legend-extra">橙色：多写</span></div></div>`;
   }
   function wordHeading(w,comparison=''){

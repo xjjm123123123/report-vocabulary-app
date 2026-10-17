@@ -130,3 +130,11 @@
 @media(max-width:760px){.spelling-comparison{padding:15px 12px}.diff-row{font-size:19px;gap:2px}.correct-row,.input-row{padding:6px}.diff-legend{gap:6px;font-size:10px}.comparison-label{font-size:12px}.input-label{margin-top:16px}}
 @media(max-width:760px){.diff-row{font-size:16px;grid-template-columns:repeat(var(--diff-columns),minmax(1.05em,1fr));gap:1px}}
 .auto-pronunciation{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:#8e82a0}.auto-pronunciation .text-button{padding:5px 0;font-size:11px}
+
+/* Keep the real answer intact; only the input contains omission markers. */
+.spelling-diff-table{min-width:0}
+.spelling-comparison .diff-row{display:flex;flex-wrap:wrap;gap:0;justify-content:flex-start;font-size:30px;letter-spacing:0}
+.spelling-comparison .diff-letter{padding:2px 1px}
+.spelling-comparison .input-row .missing{padding:0 1px}
+.spelling-comparison .correct-row{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:760px){.spelling-comparison .diff-row{font-size:22px}}
