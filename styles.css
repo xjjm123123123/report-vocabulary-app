@@ -129,3 +129,4 @@
 .first-spelling-attempt summary{cursor:pointer;padding:7px 0}.first-spelling-attempt .spelling-comparison{margin:10px 0}
 @media(max-width:760px){.spelling-comparison{padding:15px 12px}.diff-row{font-size:19px;gap:2px}.correct-row,.input-row{padding:6px}.diff-legend{gap:6px;font-size:10px}.comparison-label{font-size:12px}.input-label{margin-top:16px}}
 @media(max-width:760px){.diff-row{font-size:16px;grid-template-columns:repeat(var(--diff-columns),minmax(1.05em,1fr));gap:1px}}
+.auto-pronunciation{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:#8e82a0}.auto-pronunciation .text-button{padding:5px 0;font-size:11px}
