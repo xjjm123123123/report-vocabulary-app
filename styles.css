@@ -150,3 +150,9 @@
 .template-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;flex-shrink:0}
 .legend-fixed{background:#174f91}.legend-slot{background:#bf4c00}
 .guide-template-text{background:#f4f7fc;line-height:2.2}
+.extra-new-panel{background:#f0f3f9;border:1px solid #dce3ef;border-radius:10px;padding:22px 24px;margin:22px 0;text-align:left}
+.extra-new-panel h3{font-size:16px;margin:0 0 8px}.extra-new-panel p{font-size:13px;line-height:1.8;color:#69727b}
+.extra-new-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}.extra-new-actions label{font-size:13px}
+.extra-new-actions select{background:white;color:var(--ink);border:1px solid #cfd8e6;border-radius:6px;padding:11px 12px;min-height:44px}
+.continue-new-row{margin:20px 0}
+@media(max-width:760px){.extra-new-panel{padding:18px 16px}.extra-new-actions{gap:10px}.extra-new-actions .button{width:100%}}

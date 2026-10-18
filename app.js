@@ -30,6 +30,20 @@
   }
   function render(){stopAudio();updateNav();if(session){renderSession();return;} if(detail){renderDetail();return;} ({today:renderToday,library:renderLibrary,mistakes:renderLibrary,writing:renderWriting,settings:renderSettings}[view]||renderToday)();}
   function navigate(next){view=next;session=null;detail=null;filter.page=1;render();window.scrollTo({top:0});}
+  function extraNewControls(q) {
+    if (q.newWords.length || !q.remainingUnseen) return '';
+    const counts=[...new Set([10,25,50,150].map(n=>Math.min(n,q.remainingUnseen)))];
+    const preferred=Math.min(50,q.remainingUnseen);
+    return `<div class="extra-new-panel"><h3>今日计划已完成，还能继续学新词</h3><p>当前范围还有 ${q.remainingUnseen} 个未学词。追加只用于今天，明天仍按每天 ${state.settings.dailyNew} 词安排。</p><div class="extra-new-actions"><label for="extra-new-count">这次追加</label><select id="extra-new-count">${counts.map(n=>`<option value="${n}" ${n===preferred?'selected':''}>${n} 个新词</option>`).join('')}</select><button class="button primary" data-action="start-extra-new">继续学新词 <span>↗</span></button></div></div>`;
+  }
+  function continueNew() {
+    let q=C.queues(state,vocab);
+    if(q.newWords.length){startSession('new');return;}
+    if(!q.remainingUnseen){toast('当前范围的词已全部学过');render();return;}
+    const count=Number(document.getElementById('extra-new-count')?.value||50);
+    const next=C.extendDailyNew(state,vocab,count);
+    persist(next);updateNav();startSession('new');
+  }
   function renderToday(){
     const q=C.queues(state,vocab), learned=Object.keys(state.words).length, coreLearned=vocab.filter(w=>w.core&&state.words[w.id]).length;
     const days=daysToExam(), countdown=days>0?days:days===0?'今天':'已过';
@@ -37,13 +51,14 @@
     main.innerHTML=top('今天，积累一点表达力。','先复习，再学新词。把每个单词放进你的报告里。')+`
     <section class="hero"><div><div class="hero-tag">REPORT WRITING · 考试准备</div><h2>认识词义，更要会写一句话。</h2><p>词库共1000词，优先学习150个考试核心词。每天新学${state.settings.dailyNew}个词，核心150词优先，之后继续完整词库。不认识或拼错的词会在本轮反复出现。</p></div><div class="countdown"><strong>${countdown}</strong><span>${days>0?'天后考试':days===0?'考试日':'可调整考试日期'}</span></div></section>
     <section class="stats" aria-label="学习统计">
-    <div class="stat"><div class="stat-label">今天已学新词</div><div class="stat-number">${q.log.newIds.length}<small>/ ${state.settings.dailyNew}</small></div><div class="stat-sub">完成认词与拼写检测</div></div>
+    <div class="stat"><div class="stat-label">今天已学新词</div><div class="stat-number">${q.log.newIds.length}<small>/ ${q.dailyTarget}</small></div><div class="stat-sub">${q.log.extraNew?`日常计划 ${state.settings.dailyNew} + 今日追加 ${q.log.extraNew}`:'完成认词与拼写检测'}</div></div>
     <div class="stat"><div class="stat-label">今天已复习</div><div class="stat-number">${q.log.reviewIds.length}<small>词</small></div><div class="stat-sub">累计 ${q.log.answers} 次检测 · 复习词去重</div></div>
     <div class="stat"><div class="stat-label">考试核心词</div><div class="stat-number">${coreLearned}<small>/ 150</small></div><div class="stat-sub">${150-coreLearned} 个尚未学习</div></div>
     <div class="stat"><div class="stat-label">累计学过</div><div class="stat-number">${learned}<small>/ 1000</small></div><div class="stat-sub">学过后仍需定期复习</div></div></section>
     <div class="section-head"><h2>今日学习</h2><span>${state.settings.scope==='core'?'考试核心词优先':'完整词库 · 核心词优先'}</span></div>
     <section class="study-grid"><article class="study-tile"><div class="tile-label">DAILY REVIEW <span>01</span></div><div class="tile-count"><strong>${q.reviewWords.length}</strong><span>个历史难词可复习</span></div><p>认词问题 ${q.recognitionWords.length} 词 · 拼写问题 ${q.spellingWords.length} 词。同一个词可属于两组，今天可反复复习。</p><button class="button review-btn wide" data-action="start-review" ${q.reviewWords.length?'':'disabled'}>复习全部难词 <span>↗</span></button><button class="text-button" data-view="mistakes">查看分类记录 →</button></article>
-    <article class="study-tile"><div class="tile-label">NEW WORDS <span>02</span></div><div class="tile-count"><strong>${q.newWords.length}</strong><span>个新词待学习</span></div><p>${q.newWords.length?'先认词，再检测拼写。没掌握的词隔几个词重新出现，直到连续两次认识且首轮拼对。':q.remainingUnseen===0?'当前范围的词已全部学过，可继续巩固难词。':'今日新词数量已完成，可继续反复复习。'}</p><button class="button primary wide" data-action="start-new" ${q.newWords.length||waiting?'':'disabled'}>${waiting?'继续新词与巩固':'学习新词'} <span>↗</span></button></article></section>
+    <article class="study-tile"><div class="tile-label">NEW WORDS <span>02</span></div><div class="tile-count"><strong>${q.newWords.length}</strong><span>个新词待学习</span></div><p>${q.newWords.length?'先认词，再检测拼写。没掌握的词隔几个词重新出现，直到连续两次认识且首轮拼对。':q.remainingUnseen===0?'当前范围的词已全部学过，可继续巩固难词。':'今日新词数量已完成，可以在下方追加新词。'}</p><button class="button primary wide" data-action="start-new" ${q.newWords.length||waiting?'':'disabled'}>${waiting?'继续新词与巩固':'学习新词'} <span>↗</span></button>${q.remainingUnseen===0&&state.settings.scope==='core'?'<button class="text-button" data-view="settings">核心词已学完，去设置切换完整词库 →</button>':''}</article></section>
+    ${extraNewControls(q)}
     ${waiting?`<div class="repeat-callout"><strong>${waiting} 个词尚未完成巩固</strong><p>已保存练习进度，随时继续。每次检测失败都会重新要求连续两次通过。</p><button class="button secondary" data-action="start-pending">继续巩固</button></div>`:''}
     <div class="review-shortcuts"><button class="button secondary" data-action="start-recognition" ${q.recognitionWords.length?'':'disabled'}>复习认词问题 · ${q.recognitionWords.length}</button><button class="button secondary" data-action="start-spelling-review" ${q.spellingWords.length?'':'disabled'}>复习拼写问题 · ${q.spellingWords.length}</button><button class="text-button" data-action="start-all" ${q.learnedWords.length?'':'disabled'}>全部已学词再练一轮</button></div>
     <section class="lower-grid"><div><div class="section-head"><h2>最近7天</h2><span>新词 + 复习词</span></div><div class="week-chart">${weekChart(q.today)}</div></div><div class="writing-tip"><div class="section-head"><h2>今天的一组表达</h2><button class="text-button" data-view="writing">去写一句 ↗</button></div><div class="phrase">evaluate evidence</div><p>评估证据<br>Researchers evaluate evidence before drawing conclusions.</p></div></section>
@@ -96,7 +111,8 @@
     stopAudio();
     const s=session,done=s.index>=s.ids.length;
     if(done){
-      main.innerHTML=top('这一轮，完成了。','本轮每个词都已通过认词与拼写检测。')+`<div class="empty-state" style="margin-top:35px"><div class="eyebrow">SESSION COMPLETE</div><h2>完成 ${s.total} 个词 · ${s.index} 次检测</h2><p>本轮难词已连续两次认识且首轮拼对。历史认词与拼写问题仍分别保留，今天可以继续再练。</p><button class="button primary" data-action="restart-session">再练一轮</button> <button class="button secondary" data-action="exit-session">返回今日学习</button> <button class="text-button" data-view="writing">用新词写一句</button>${s.undo?'<div><button class="text-button" data-action="undo">撤销上一个词的记录</button></div>':''}</div>`;return;
+      const q=C.queues(state,vocab);
+      main.innerHTML=top('这一轮，完成了。','本轮每个词都已通过认词与拼写检测。')+`<div class="empty-state" style="margin-top:35px"><div class="eyebrow">SESSION COMPLETE</div><h2>完成 ${s.total} 个词 · ${s.index} 次检测</h2><p>本轮难词已连续两次认识且首轮拼对。历史认词与拼写问题仍分别保留，今天可以继续再练。</p>${q.newWords.length?`<div class="continue-new-row"><button class="button primary" data-action="start-new">继续学剩余新词 · ${q.newWords.length} 词 ↗</button></div>`:extraNewControls(q)}${!q.remainingUnseen&&!q.newWords.length?`<p>当前范围的词已全部学过。${state.settings.scope==='core'?'<button class="text-button" data-view="settings">切换完整词库继续学习 →</button>':''}</p>`:''}<button class="button secondary" data-action="restart-session">再练一轮</button> <button class="button secondary" data-action="exit-session">返回今日学习</button> <button class="text-button" data-view="writing">用新词写一句</button>${s.undo?'<div><button class="text-button" data-action="undo">撤销上一个词的记录</button></div>':''}</div>`;return;
     }
     const w=byId.get(s.ids[s.index]);
     const recognizing=s.phase==='recognize',studying=s.phase==='study',spelling=s.phase==='spell',result=s.phase==='result';
@@ -293,7 +309,7 @@
     if(b.dataset.word){detail=b.dataset.word;renderDetail();window.scrollTo({top:0});return;}
     if(b.dataset.recognition){recognize(b.dataset.recognition);return;}
     const actions={
-      'start-new':()=>startSession('new'),'start-review':()=>startSession('review'),'start-recognition':()=>startSession('recognition'),'start-spelling-review':()=>startSession('spelling-review'),'start-pending':()=>startSession('pending'),'start-all':()=>startSession('all'),
+      'start-new':()=>startSession('new'),'start-extra-new':continueNew,'start-review':()=>startSession('review'),'start-recognition':()=>startSession('recognition'),'start-spelling-review':()=>startSession('spelling-review'),'start-pending':()=>startSession('pending'),'start-all':()=>startSession('all'),
       'restart-session':()=>{const old=session;session=null;detail=null;session={kind:old.kind,ids:[...new Set(old.ids)],index:0,total:old.total,doneIds:[],undo:null};resetCard(session);renderSession();},
       'issue-filter':()=>{filter.issue=b.dataset.issue;filter.page=1;renderLibrary();},'review-filter':()=>startFilteredReview(),undo,
       'start-spelling':startSpelling,'cannot-spell':()=>checkSpelling(true),'complete-word':completeWord,'retry-spelling':retrySpelling,'meaning-unknown':meaningUnknown,

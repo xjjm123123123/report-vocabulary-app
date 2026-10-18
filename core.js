@@ -43,7 +43,9 @@
     }
     for (const [d, log] of Object.entries(raw.days)) {
       if (!dateOK(d) || !log || !Array.isArray(log.newIds) || !Array.isArray(log.reviewIds) || !Number.isInteger(log.answers) || log.answers < 0 || [...log.newIds, ...log.reviewIds].some(id => !ids.has(id))) throw new Error('每日记录不正确');
+      if (log.extraNew !== undefined && (!Number.isInteger(log.extraNew) || log.extraNew < 0 || log.extraNew > ids.size)) throw new Error('追加新词记录不正确');
       result.days[d] = { newIds: [...new Set(log.newIds)], reviewIds: [...new Set(log.reviewIds)], answers: log.answers };
+      if (log.extraNew !== undefined) result.days[d].extraNew = log.extraNew;
     }
     return result;
   }
@@ -51,7 +53,8 @@
     const today = dayKey(now), log = state.days[today] || { newIds: [], reviewIds: [], answers: 0 };
     const sorted = [...vocab].sort((a,b) => Number(b.core) - Number(a.core) || a.rank - b.rank);
     const eligible = sorted.filter(w => !state.words[w.id] && (state.settings.scope === 'all' || w.core));
-    const newWords = eligible.slice(0, Math.max(0, state.settings.dailyNew - log.newIds.length));
+    const dailyTarget = state.settings.dailyNew + (log.extraNew || 0);
+    const newWords = eligible.slice(0, Math.max(0, dailyTarget - log.newIds.length));
     // Reviews always include every learned category, regardless of the new-word scope.
     const learned = sorted.filter(w => state.words[w.id]);
     const recognitionWords = learned.filter(w => difficulties(state.words[w.id]).recognition);
@@ -61,7 +64,18 @@
     const reviewWords = learned.filter(w => Object.values(difficulties(state.words[w.id])).some(Boolean));
     reviewWords.sort((a,b) => remaining(state.words[b.id]) - remaining(state.words[a.id]) || state.words[a.id].due - state.words[b.id].due);
     const dueWords = learned.filter(w => state.words[w.id].due <= now.getTime());
-    return { today, log, newWords, reviewWords, recognitionWords, spellingWords, legacyWords, pendingWords, dueWords, learnedWords: learned, waiting: [], remainingUnseen: eligible.length };
+    return { today, log, dailyTarget, newWords, reviewWords, recognitionWords, spellingWords, legacyWords, pendingWords, dueWords, learnedWords: learned, waiting: [], remainingUnseen: eligible.length };
+  }
+  function extendDailyNew(state, vocab, count, now = new Date()) {
+    if (!Number.isInteger(count) || count < 1 || count > 200) throw new Error('请选择1至200个追加新词');
+    const q = queues(state, vocab, now);
+    if (q.newWords.length || !q.remainingUnseen) return state;
+    const next = JSON.parse(JSON.stringify(state));
+    const log = next.days[q.today] || { newIds: [], reviewIds: [], answers: 0 };
+    const target = Math.max(q.dailyTarget, log.newIds.length) + Math.min(count, q.remainingUnseen);
+    log.extraNew = target - state.settings.dailyNew;
+    next.days[q.today] = log;
+    return next;
   }
   function rate(state, id, rating, now = new Date()) {
     if (!['again','hard','good','easy'].includes(rating)) throw new Error('未知评分');
@@ -103,5 +117,5 @@
     next.words[id].practice = { remaining: passed ? Math.max(0, remaining(state.words[id]) - 1) : 2 };
     return next;
   }
-  return { VERSION, dayKey, addDays, fresh, validate, queues, rate, assessAndRate, streak, difficulties, remaining };
+  return { VERSION, dayKey, addDays, fresh, validate, queues, extendDailyNew, rate, assessAndRate, streak, difficulties, remaining };
 });
